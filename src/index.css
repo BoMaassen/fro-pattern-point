@@ -18,30 +18,10 @@
 /*-----TYPOGRAFIE-----*/
 h1, h2, h3, h4, button {
   font-family: "Coiny", serif;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  margin-block: 0.67em;
   color: var(--text-color);
-}
-
-h2 {
-  margin-block: 0.83em;
-  color: var(--text-color);
-}
-
-h3 {
-  margin-block: 1em;
-}
-
-h4 {
-  margin-block: 1.33em;
 }
 
 p {
-  margin-block: 0.5em;
   color: var(--text-color);
   font-family: "Lexend", serif;
 
