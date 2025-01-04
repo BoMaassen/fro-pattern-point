@@ -11,6 +11,7 @@
   --primary-color: #D74E09;
   --secondary-color: #F2BB05;
   --tertiary-color: #6E0E0A;
+  --tertiary-color-30: #6E0E0A4d ;
   --text-color: #124E78;
   --background-color: #F0F0C9;
 }
@@ -20,7 +21,7 @@ body{
 }
 
 /*-----TYPOGRAFIE-----*/
-h1, h2, h3, h4, button {
+h1, h2, h3, h4 {
   font-family: "Coiny", serif;
   color: var(--text-color);
 }
@@ -32,8 +33,13 @@ p {
 }
 
 /*-----BUTTONS & LINKS-----*/
-button{
+button, input, input::placeholder{
+  font-family: "Coiny", serif;
   color: var(--background-color);
+}
+
+input{
+
 }
 
 ul {
@@ -42,4 +48,5 @@ ul {
 
 a, a:visited {
   text-decoration: none;
+  color: var(--text-color);
 }
