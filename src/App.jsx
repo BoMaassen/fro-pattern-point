@@ -2,11 +2,15 @@ import './App.css'
 import addIcon from './assets/Add Circle.svg' ;
 import userIcon from './assets/User Circle Single.svg';
 import magnifyingGlass from './assets/Magnifying Glass.svg'
+import {Route, Routes} from "react-router-dom";
+import Home from "./pages/home/Home.jsx";
+
 
 function App() {
 
     return (
         <>
+            <header>
             <nav className="nav-bar">
                 <h2 className="nav-logo">Pattern Point</h2>
                 <div className="nav-search-bar">
@@ -26,10 +30,10 @@ function App() {
                     </button>
                 </div>
             </nav>
-            <h2>titel 2</h2>
-            <h3>titel 3</h3>
-            <h4>titel 4</h4>
-            <p>hello</p>
+            </header>
+            <Routes>
+                <Route path="/" element={<Home/>}></Route>
+            </Routes>
         </>
     )
 }
