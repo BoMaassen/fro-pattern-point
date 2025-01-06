@@ -1,7 +1,12 @@
 import './Home.css'
-import filterIcon from '../../assets/Filter-icon.svg'
-import arrowDown from '../../assets/arrow down.svg'
-import arrowButton from '../../assets/arrow-button.svg'
+import filterIcon from '../../assets/icons/Filter-icon.svg'
+import arrowDown from '../../assets/icons/arrow down.svg'
+import arrowButton from '../../assets/icons/arrow-button.svg'
+import bag from '../../assets/post-img/bag.jpg'
+import beanie from '../../assets/post-img/beanie.jpg'
+import scarf from '../../assets/post-img/scarf.jpg'
+import sweater from '../../assets/post-img/sweater.jpg'
+import userIcon from '../../assets/icons/User Circle Single.svg'
 
 function Home() {
     return (
@@ -17,6 +22,7 @@ function Home() {
                     <button type="button">Mutsen</button>
                     <button type="button">Knuffles</button>
                     <button type="button">Sjaals</button>
+
                 </div>
                 <div className="right-section-container">
                     <button className="arrow-button" type="button"><img src={arrowButton} alt="pijl naar rechts icoon"/>
@@ -24,6 +30,18 @@ function Home() {
                     <button className="sort-button" type="button">Sorteren<img src={arrowDown}
                                                                                alt="pijl naar beneden icoon"/></button>
                 </div>
+            </section>
+            <section className="feed-container">
+                <article className="post">
+                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
+                    <div className="post-info">
+                        <h3>Fisher hat beanie</h3>
+                        <div className="user-info">
+                            <img src={userIcon} alt="Profiel foto"/>
+                            <p>@user1</p>
+                        </div>
+                    </div>
+                </article>
             </section>
         </main>
 

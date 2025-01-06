@@ -1,40 +1,77 @@
-main{
+/*-----Algemeen-----*/
+main {
     padding: 0 40px;
 }
 
-.filter-menu, .right-section-container{
+/*-----Filter menu-----*/
+.filter-menu, .right-section-container, .categories-container, .filter-button, .sort-button, .arrow-button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+}
+
+.filter-menu, .right-section-container, .categories-container, .filter-button, .sort-button, .arrow-button {
     gap: 10px;
 }
 
-.filter-menu button{
+.filter-menu, .right-section-container {
+    justify-content: space-between;
+}
+
+.filter-button, .sort-button, .arrow-button {
+    justify-content: space-around;
+}
+
+.filter-menu button {
     background-color: var(--primary-color);
     border: none;
     border-radius: 20px;
 }
 
-.filter-button, .categories-container button, .sort-button{
+.filter-button, .categories-container button, .sort-button {
     padding: 5px 25px;
 }
 
 .categories-container {
-    width: 65vw;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    width: 70vw;
     justify-content: start;
-    gap: 10px;
 }
 
+/*-----Feed-----*/
 
+.feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
 
-.filter-button, .sort-button, .arrow-button{
+/*-----Post-----*/
+.post {
+    display: flex;
+    flex-direction: column;
+    max-width: 15vw;
+
+}
+
+.image-wrapper{
+    display: flex;
+}
+
+.image-wrapper img {
+    width: 100%;
+    border-radius: 20px 20px 0 0 ;
+}
+
+.post-info{
+    background-color: var(--secondary-color-30);
+    border-radius: 0 0 20px 20px;
+    padding: 5px 10px;
+}
+.user-info{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
     gap: 10px;
+
 }

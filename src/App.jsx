@@ -1,7 +1,7 @@
 import './App.css'
-import addIcon from './assets/Add Circle.svg' ;
-import userIcon from './assets/User Circle Single.svg';
-import magnifyingGlass from './assets/Magnifying Glass.svg'
+import addIcon from './assets/icons/Add Circle.svg' ;
+import userIcon from './assets/icons/User Circle Single.svg';
+import magnifyingGlass from './assets/icons/Magnifying Glass.svg'
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/home/Home.jsx";
 
