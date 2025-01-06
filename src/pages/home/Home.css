@@ -1,6 +1,6 @@
 /*-----Algemeen-----*/
 main {
-    padding: 0 40px;
+    padding: 0 70px;
 }
 
 /*-----Filter menu-----*/
@@ -40,17 +40,14 @@ main {
 /*-----Feed-----*/
 
 .feed-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: block;
     margin-top: 20px;
 }
 
 /*-----Post-----*/
 .post {
-    display: flex;
-    flex-direction: column;
-    max-width: 15vw;
+    max-width: 224px;
+    margin-bottom: 45px;
 
 }
 
