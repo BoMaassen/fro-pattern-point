@@ -6,6 +6,7 @@ import Masonry from 'masonry-layout';
 import {useEffect} from "react";
 import imagesLoaded from "imagesloaded";
 import {posts} from "../../constance/posts.js";
+import Post from "../../assets/components/post/Post.jsx";
 
 function Home() {
 
@@ -50,7 +51,10 @@ function Home() {
             </section>
             <section className="feed-container">
                 {posts.map((post)=> (
-                    <article key={post.id} className="post">
+                    <Post title={post.title} img={post.imageSrc} alt={post.altText} profilePiture={post.userIcon} username={post.username} key={post.id}/>
+
+
+                    /*<article key={post.id} className="post">
                         <span className="image-wrapper"><img src={post.imageSrc} alt={post.altText}/></span>
                         <div className="post-info">
                             <h3>{post.title}</h3>
@@ -59,7 +63,7 @@ function Home() {
                                 <p>{post.username}</p>
                             </div>
                         </div>
-                    </article>)
+                    </article>*/)
                 )}
             </section>
         </main>

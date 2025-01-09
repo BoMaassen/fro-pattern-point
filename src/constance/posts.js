@@ -42,7 +42,7 @@ export const posts = [
         imageSrc: beanie,
         altText: "Gehaakte muts",
         title: "Fisher hat beanie",
-        username: "@user1",
+        username: "@user5",
         userIcon: userIcon
     },
     {
@@ -50,7 +50,7 @@ export const posts = [
         imageSrc: bag,
         altText: "Gehaakte tas met vissen",
         title: "Fish bag",
-        username: "@user2",
+        username: "@user6",
         userIcon: userIcon
     },
     {
@@ -58,7 +58,7 @@ export const posts = [
         imageSrc: sweater,
         altText: "Gehaakte raglan sweater",
         title: "Raglan sweater",
-        username: "@user3",
+        username: "@user7",
         userIcon: userIcon
     },
     {
@@ -66,7 +66,7 @@ export const posts = [
         imageSrc: scarf,
         altText: "Gehaakte sjaal met strepen",
         title: "Striped scarf",
-        username: "@user4",
+        username: "@user8",
         userIcon: userIcon
     },
     {
@@ -74,7 +74,7 @@ export const posts = [
         imageSrc: beanie,
         altText: "Gehaakte muts",
         title: "Fisher hat beanie",
-        username: "@user1",
+        username: "@user9",
         userIcon: userIcon
     },
     {
@@ -82,7 +82,7 @@ export const posts = [
         imageSrc: bag,
         altText: "Gehaakte tas met vissen",
         title: "Fish bag",
-        username: "@user2",
+        username: "@user10",
         userIcon: userIcon
     },
     {
@@ -90,7 +90,7 @@ export const posts = [
         imageSrc: sweater,
         altText: "Gehaakte raglan sweater",
         title: "Raglan sweater",
-        username: "@user3",
+        username: "@user11",
         userIcon: userIcon
     },
     {
@@ -98,7 +98,7 @@ export const posts = [
         imageSrc: scarf,
         altText: "Gehaakte sjaal met strepen",
         title: "Striped scarf",
-        username: "@user4",
+        username: "@user12",
         userIcon: userIcon
     }
 ];
