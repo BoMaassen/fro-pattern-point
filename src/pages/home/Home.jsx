@@ -2,32 +2,22 @@ import './Home.css'
 import filterIcon from '../../assets/icons/Filter-icon.svg'
 import arrowDown from '../../assets/icons/arrow down.svg'
 import arrowButton from '../../assets/icons/arrow-button.svg'
-import bag from '../../assets/post-img/bag.jpg'
-import beanie from '../../assets/post-img/beanie.jpg'
-import scarf from '../../assets/post-img/scarf.jpg'
-import sweater from '../../assets/post-img/sweater.jpg'
-import userIcon from '../../assets/icons/User Circle Single.svg'
 import Masonry from 'masonry-layout';
-import {useEffect, useRef} from "react";
-import imagesLoaded from "imagesloaded";;
+import {useEffect} from "react";
+import imagesLoaded from "imagesloaded";
+import {posts} from "../../constance/posts.js";
 
 function Home() {
-    const masonryRef = useRef(null);
 
     useEffect(() => {
-        const elem = masonryRef.current;
-
         let masonryInstance;
-
-
-        imagesLoaded(elem, () => {
-            masonryInstance = new Masonry(elem, {
+        imagesLoaded('.feed-container', () => {
+            masonryInstance = new Masonry('.feed-container', {
                 itemSelector: ".post",
                 columnWidth: ".post",
                 gutter: 45,
             });
         });
-
 
         return () => {
             if (masonryInstance) {
@@ -35,7 +25,6 @@ function Home() {
             }
         };
     }, []);
-
 
     return (
         <main>
@@ -59,199 +48,19 @@ function Home() {
                                                                                alt="pijl naar beneden icoon"/></button>
                 </div>
             </section>
-            <section className="feed-container" ref={masonryRef}>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
+            <section className="feed-container">
+                {posts.map((post)=> (
+                    <article key={post.id} className="post">
+                        <span className="image-wrapper"><img src={post.imageSrc} alt={post.altText}/></span>
+                        <div className="post-info">
+                            <h3>{post.title}</h3>
+                            <div className="user-info">
+                                <img src={post.userIcon} alt="Profiel foto"/>
+                                <p>{post.username}</p>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper">
-                    <img src={bag} alt="Gehaakte tas met vissen"/>
-                    </span>
-                    <div className="post-info">
-                        <h3>Fish bag</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user2</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={sweater} alt="Gehaakte raglan sweater"/></span>
-                    <div className="post-info">
-                        <h3>Raglan sweater</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user3</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper">
-                    <img src={scarf} alt="Gehaakte sjaal met strepen"/>
-                    </span>
-                    <div className="post-info">
-                        <h3>Striped scarf</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user4</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={sweater} alt="Gehaakte raglan sweater"/></span>
-                    <div className="post-info">
-                        <h3>Raglan sweater</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user3</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper">
-                    <img src={scarf} alt="Gehaakte sjaal met strepen"/>
-                    </span>
-                    <div className="post-info">
-                        <h3>Striped scarf</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user4</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper">
-                    <img src={bag} alt="Gehaakte tas met vissen"/>
-                    </span>
-                    <div className="post-info">
-                        <h3>Fish bag</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user2</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={sweater} alt="Gehaakte raglan sweater"/></span>
-                    <div className="post-info">
-                        <h3>Raglan sweater</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user3</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper">
-                    <img src={scarf} alt="Gehaakte sjaal met strepen"/>
-                    </span>
-                    <div className="post-info">
-                        <h3>Striped scarf</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user4</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={sweater} alt="Gehaakte raglan sweater"/></span>
-                    <div className="post-info">
-                        <h3>Raglan sweater</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user3</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper">
-                    <img src={scarf} alt="Gehaakte sjaal met strepen"/>
-                    </span>
-                    <div className="post-info">
-                        <h3>Striped scarf</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user4</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
-                <article className="post">
-                    <span className="image-wrapper"><img src={beanie} alt="Gehaakte muts"/></span>
-                    <div className="post-info">
-                        <h3>Fisher hat beanie</h3>
-                        <div className="user-info">
-                            <img src={userIcon} alt="Profiel foto"/>
-                            <p>@user1</p>
-                        </div>
-                    </div>
-                </article>
+                    </article>)
+                )}
             </section>
         </main>
 
