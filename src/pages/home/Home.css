@@ -1,0 +1,46 @@
+/*-----Algemeen-----*/
+main {
+    padding: 0 70px;
+}
+
+/*-----Filter menu-----*/
+.filter-menu, .right-section-container, .categories-container, .filter-button, .sort-button, .arrow-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.filter-menu, .right-section-container, .categories-container, .filter-button, .sort-button, .arrow-button {
+    gap: 10px;
+}
+
+.filter-menu, .right-section-container {
+    justify-content: space-between;
+}
+
+.filter-button, .sort-button, .arrow-button {
+    justify-content: space-around;
+}
+
+.filter-menu button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+}
+
+.filter-button, .categories-container button, .sort-button {
+    padding: 5px 25px;
+}
+
+.categories-container {
+    width: 70vw;
+    justify-content: start;
+}
+
+/*-----Feed-----*/
+
+.feed-container {
+    display: block;
+    margin-top: 20px;
+}
+

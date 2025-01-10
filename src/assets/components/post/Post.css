@@ -1,0 +1,29 @@
+
+/*-----Post-----*/
+.post {
+    max-width: 224px;
+    margin-bottom: 45px;
+
+}
+
+.image-wrapper{
+    display: flex;
+}
+
+.image-wrapper img {
+    width: 100%;
+    border-radius: 20px 20px 0 0 ;
+}
+
+.post-info{
+    background-color: var(--secondary-color-30);
+    border-radius: 0 0 20px 20px;
+    padding: 5px 10px;
+}
+.user-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+}
