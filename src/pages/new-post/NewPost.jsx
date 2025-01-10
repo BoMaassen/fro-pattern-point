@@ -1,37 +1,54 @@
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 function NewPost() {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const { register, handleSubmit, formState: { errors }} = useForm();
+    const [isDraft, toggleIsDraft] = useState(false);
 
     function handleFormSubmit(data) {
-        console.log(data);
+        const formData = { ...data, isDraft };
+        if (isDraft) {
+            console.log("Concept opgeslagen:", formData);
+        } else {
+            console.log("Bericht geüpload:", formData);
+        }
     }
-
-    console.log(errors)
 
     return (
         <main>
             <h1>New post</h1>
             <section>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
-                    <label htmlFor="content-img">
-                        Upload foto's in png of jpeg
-                    </label>
-                    <input id="content-img" {...register("content-img",
-                        {
-                            required: { value: true, message: "Je moet een foto uploaden"}
-                        })
-                    } type="file" accept="image/png, image/jpeg"/>
-                    {errors['content-img'] && <p>{errors['content-img'].message}</p>}
-                    <label htmlFor="title">
-                        Titel
-                    </label>
-                    <input id="title" {...register("title", {required: { value: true, message: "Titel is verplicht"}, minLength:{ value: 5, message: "Titel moet minstens 5 karakters bevatten"}, maxLength:{ value: 50, message: "Titel mag maximaal 50 karakter bevatten "},})} type="text"/>
+                    <label htmlFor="content-img">Upload foto's in png of jpeg</label>
+                    <input
+                        id="content-img"
+                        {...register("content-img", {
+                            required: { value: true, message: "Je moet een foto uploaden" },
+                        })}
+                        type="file"
+                        accept="image/png, image/jpeg"
+                    />
+                    {errors["content-img"] && <p>{errors["content-img"].message}</p>}
+
+                    <label htmlFor="title">Titel</label>
+                    <input
+                        id="title"
+                        {...register("title", {
+                            required: !isDraft ? { value: true, message: "Titel is verplicht" } : false,
+                            minLength: !isDraft ? { value: 5, message: "Titel moet minstens 5 karakters bevatten" } : false,
+                            maxLength: !isDraft ? { value: 50, message: "Titel mag maximaal 50 karakters bevatten" } : false,
+                        })}
+                        type="text"
+                    />
                     {errors.title && <p>{errors.title.message}</p>}
-                    <label htmlFor="category">
-                        Categorie
-                    </label>
-                    <select id="category" {...register("category", {required:{ value: true, message: "Je moet een categorie kiezen"},})}>
+
+                    <label htmlFor="category">Categorie</label>
+                    <select
+                        id="category"
+                        {...register("category", {
+                            required: !isDraft ? { value: true, message: "Je moet een categorie kiezen" } : false,
+                        })}
+                    >
                         <option value="">-selecteer optie-</option>
                         <option value="Truien">Truien</option>
                         <option value="Broeken">Broeken</option>
@@ -41,18 +58,36 @@ function NewPost() {
                         <option value="Knuffels">Knuffels</option>
                     </select>
                     {errors.category && <p>{errors.category.message}</p>}
-                    <label htmlFor="description">
-                        Beschrijving
-                    </label>
-                    <textarea id="description" {...register("description", {required:{ value: true, message: "Beschrijving is verplicht"}, minLength:{ value: 5, message: "Titel moet minstens 5 karakters bevatten"}, maxLength:{ value: 300, message: "Titel mag maximaal 300 karakter bevatten "},})}></textarea>
+
+                    <label htmlFor="description">Beschrijving</label>
+                    <textarea
+                        id="description"
+                        {...register("description", {
+                            required: !isDraft ? { value: true, message: "Beschrijving is verplicht" } : false,
+                            minLength: !isDraft ? { value: 5, message: "Beschrijving moet minstens 5 karakters bevatten" } : false,
+                            maxLength: !isDraft ? { value: 300, message: "Beschrijving mag maximaal 300 karakters bevatten" } : false,
+                        })}
+                    ></textarea>
                     {errors.description && <p>{errors.description.message}</p>}
-                    <button type="submit">
+
+                    <button
+                        type="submit"
+                        onClick={() =>
+                            toggleIsDraft(true)}
+                    >
+                        concept
+                    </button>
+
+                    <button
+                        type="submit"
+                        onClick={() => toggleIsDraft(false)}
+                    >
                         Uploaden
                     </button>
                 </form>
             </section>
         </main>
-    )
+    );
 }
 
 export default NewPost;
