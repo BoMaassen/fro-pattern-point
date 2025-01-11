@@ -1,4 +1,4 @@
-function Input({inputId, labelName, validationRules, type, accept, register, errors}){
+function Input({inputId, labelName, validationRules, multiple, onChange, type, accept, register, errors}){
     return(
         <>
             <label htmlFor={inputId}>{labelName}</label>
@@ -7,6 +7,8 @@ function Input({inputId, labelName, validationRules, type, accept, register, err
                 {...register(inputId, validationRules)}
                 type={type}
                 accept={accept}
+                multiple={multiple}
+                onChange={onChange}
             />
             {errors[inputId] && <p>{errors[inputId].message}</p>}
         </>

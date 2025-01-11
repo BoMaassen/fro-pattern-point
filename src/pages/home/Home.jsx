@@ -6,7 +6,7 @@ import Masonry from 'masonry-layout';
 import {useEffect} from "react";
 import imagesLoaded from "imagesloaded";
 import {posts} from "../../constance/posts.js";
-import Post from "../../assets/components/post/Post.jsx";
+import Post from "../../components/post/Post.jsx";
 
 function Home() {
 
