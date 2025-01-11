@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 import {useState} from "react";
 import Input from "../../assets/components/input/Input.jsx";
 import Select from "../../assets/components/select/Select.jsx";
+import Textarea from "../../assets/components/textarea/Textarea.jsx";
 
 function NewPost() {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -36,22 +37,13 @@ function NewPost() {
                         required: !isDraft ? {value: true, message: "Je moet een categorie kiezen"} : false,
                     }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]} register={register} errors={errors}/>
 
-                    <label htmlFor="description">Beschrijving</label>
-                    <textarea
-                        id="description"
-                        {...register("description", {
-                            required: !isDraft ? {value: true, message: "Beschrijving is verplicht"} : false,
-                            minLength: !isDraft ? {
-                                value: 5,
-                                message: "Beschrijving moet minstens 5 karakters bevatten"
-                            } : false,
-                            maxLength: !isDraft ? {
-                                value: 300,
-                                message: "Beschrijving mag maximaal 300 karakters bevatten"
-                            } : false,
-                        })}
-                    ></textarea>
-                    {errors.description && <p>{errors.description.message}</p>}
+                    <Textarea textareaId="description" labelName="Beschrijving" validationRules={{
+                        required: !isDraft ? {value: true, message: "Beschrijving is verplicht"} : false,
+                        minLength: !isDraft ? {value: 5, message: "Beschrijving moet minstens 5 karakters bevatten"} : false,
+                        maxLength: !isDraft ? {value: 300, message: "Beschrijving mag maximaal 300 karakters bevatten"} : false,
+                    }} register={register} errors={errors} />
+
+
 
                     <button
                         type="submit"
