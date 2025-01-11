@@ -3,6 +3,7 @@ import {useState} from "react";
 import Input from "../../assets/components/input/Input.jsx";
 import Select from "../../assets/components/select/Select.jsx";
 import Textarea from "../../assets/components/textarea/Textarea.jsx";
+import Button from "../../assets/components/button/Button.jsx";
 
 function NewPost() {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -43,22 +44,9 @@ function NewPost() {
                         maxLength: !isDraft ? {value: 300, message: "Beschrijving mag maximaal 300 karakters bevatten"} : false,
                     }} register={register} errors={errors} />
 
+                    <Button type="submit" onClick={() => toggleIsDraft(true)} text="Concept"/>
+                    <Button type="submit" onClick={() => toggleIsDraft(false)} text="Uploaden"/>
 
-
-                    <button
-                        type="submit"
-                        onClick={() =>
-                            toggleIsDraft(true)}
-                    >
-                        concept
-                    </button>
-
-                    <button
-                        type="submit"
-                        onClick={() => toggleIsDraft(false)}
-                    >
-                        Uploaden
-                    </button>
                 </form>
             </section>
         </main>
