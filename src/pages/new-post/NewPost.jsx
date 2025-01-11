@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Input from "../../assets/components/input/Input.jsx";
 
 function NewPost() {
     const { register, handleSubmit, formState: { errors }} = useForm();
@@ -19,28 +20,17 @@ function NewPost() {
             <h1>New post</h1>
             <section>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
-                    <label htmlFor="content-img">Upload foto's in png of jpeg</label>
-                    <input
-                        id="content-img"
-                        {...register("content-img", {
-                            required: { value: true, message: "Je moet een foto uploaden" },
-                        })}
-                        type="file"
-                        accept="image/png, image/jpeg"
-                    />
-                    {errors["content-img"] && <p>{errors["content-img"].message}</p>}
 
-                    <label htmlFor="title">Titel</label>
-                    <input
-                        id="title"
-                        {...register("title", {
-                            required: !isDraft ? { value: true, message: "Titel is verplicht" } : false,
-                            minLength: !isDraft ? { value: 5, message: "Titel moet minstens 5 karakters bevatten" } : false,
-                            maxLength: !isDraft ? { value: 50, message: "Titel mag maximaal 50 karakters bevatten" } : false,
-                        })}
-                        type="text"
-                    />
-                    {errors.title && <p>{errors.title.message}</p>}
+                    <Input inputId="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
+                        required: { value: true, message: "Je moet een foto uploaden" },
+                    }} type="file" accept="image/png, image/jpeg" register={register} errors={errors}/>
+
+                    <Input inputId="title" labelName="Titel" validationRules={{
+                        required: !isDraft ? { value: true, message: "Titel is verplicht" } : false,
+                        minLength: !isDraft ? { value: 5, message: "Titel moet minstens 5 karakters bevatten" } : false,
+                        maxLength: !isDraft ? { value: 50, message: "Titel mag maximaal 50 karakters bevatten" } : false,
+                    }} type="text" register={register} errors={errors}/>
+
 
                     <label htmlFor="category">Categorie</label>
                     <select
