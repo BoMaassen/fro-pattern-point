@@ -6,6 +6,7 @@ import Textarea from "../../components/textarea/Textarea.jsx";
 import Button from "../../components/button/Button.jsx";
 import "./NewPost.css";
 import closeIcon from "../../assets/icons/close icon.svg"
+import uploadIcon from "../../assets/icons/upload icon.svg"
 
 function NewPost() {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -40,21 +41,31 @@ function NewPost() {
 
     return (
         <main>
-            <h1>New post</h1>
-            <section className="new-post-container">
-                <Button type="button" img={closeIcon} alt="Sluit icoon"/>
+            <section className="outer-container">
+                <div className="new-post-container">
+                <Button classname="icon-button" type="button" img={closeIcon} alt="Sluit icoon"/>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
 
-                    <div>
-                        <Input inputId="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
-                            required: {value: true, message: "Je moet een foto uploaden"},
-                        }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
-                               errors={errors} onChange={preview} />
-                    </div>
+                    <div className="form-fields">
+                        {filePreviews.length > 0 ?
+                            <span className="form-field-left">
+                                <img className="preview-img" src={filePreviews[0]} alt="peview img"/>
+                                <Button classname="icon-button delete-img" type="button" img={closeIcon} alt="Sluit icoon" onClick={(()=> setFilePreview([]))}/>
+                            </span>:
+                            <div className="form-field-left">
+                                <Input className="text-field-red" inputId="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
+                                    required: {value: true, message: "Je moet een foto uploaden"},
+                                }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
+                                       errors={errors} onChange={preview}>
+                                    <img src={uploadIcon} alt="upload button"/>
+                                </Input>
 
-                    <div>
-                        <Input inputId="title" labelName="Titel" validationRules={{
-                            required: !isDraft ? {value: true, message: "Titel is verplicht"} : false,
+                            </div>
+
+                        }
+                        <div className="form-field-right">
+                            <Input className="text-field-red" inputId="title" labelName="Titel" validationRules={{
+                                required: !isDraft ? {value: true, message: "Titel is verplicht"} : false,
                             minLength: !isDraft ? {
                                 value: 5,
                                 message: "Titel moet minstens 5 karakters bevatten"
@@ -65,12 +76,12 @@ function NewPost() {
                             } : false,
                         }} type="text" register={register} errors={errors}/>
 
-                        <Select selectId="category" labelName="Categorie" validationRules={{
+                        <Select className="text-field-red " selectId="category" labelName="Categorie" validationRules={{
                             required: !isDraft ? {value: true, message: "Je moet een categorie kiezen"} : false,
                         }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]}
                                 register={register} errors={errors}/>
 
-                        <Textarea textareaId="description" labelName="Beschrijving" validationRules={{
+                        <Textarea className="text-field-red" textareaId="description" labelName="Beschrijving" validationRules={{
                             required: !isDraft ? {value: true, message: "Beschrijving is verplicht"} : false,
                             minLength: !isDraft ? {
                                 value: 5,
@@ -82,16 +93,23 @@ function NewPost() {
                             } : false,
                         }} register={register} errors={errors}/>
                     </div>
-
-                    {filePreviews?.map((filePreview) => {
-                        return <img src={filePreview} key={filePreview} alt="peview img"></img>
-                    })}
-
-
-                    <Button type="submit" onClick={() => toggleIsDraft(true)} text="Concept"/>
-                    <Button type="submit" onClick={() => toggleIsDraft(false)} text="Uploaden"/>
-
+                    </div>
+                    <div className="preview-buttons">
+                        {filePreviews.length > 1 ?
+                            filePreviews?.slice(1).map((filePreview) => {
+                                return <span key={filePreview} className="placeholder-img"><img className="preview-img" src={filePreview}  alt="peview img" ></img></span>
+                            }) : <div className="placeholder">
+                                <div className="placeholder-img"></div>
+                                <div className="placeholder-img"></div>
+                                <div className="placeholder-img"></div>
+                            </div>}
+                        <div className="buttons">
+                            <Button classname="text-button" type="submit" onClick={() => toggleIsDraft(true)} text="Concept"/>
+                            <Button classname="text-button" type="submit" onClick={() => toggleIsDraft(false)} text="Uploaden"/>
+                        </div>
+                    </div>
                 </form>
+                </div>
             </section>
         </main>
     );

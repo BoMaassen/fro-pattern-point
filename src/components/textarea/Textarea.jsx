@@ -1,12 +1,14 @@
-function Textarea({textareaId, labelName, validationRules, register, errors}){
-    return(
+function Textarea({className, textareaId, labelName, validationRules, register, errors}) {
+    return (
         <>
-            <label htmlFor={textareaId}>{labelName}</label>
-            <textarea
-                id={textareaId}
-                {...register(textareaId,validationRules)}
-            ></textarea>
-            {errors[textareaId] && <p>{errors[textareaId].message}</p>}
+            <label htmlFor={textareaId}>{labelName}
+                <textarea rows="9"
+                          className={className}
+                          id={textareaId}
+                          {...register(textareaId, validationRules)}
+                ></textarea>
+                {errors[textareaId] && <p className="error-message">{errors[textareaId].message}</p>}
+            </label>
         </>
     )
 }

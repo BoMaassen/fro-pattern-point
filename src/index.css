@@ -15,6 +15,7 @@
   --tertiary-color: #6E0E0A;
   --tertiary-color-30: #6E0E0A4d ;
   --text-color: #124E78;
+  --text-color-30: #124E784d;
   --background-color: #F0F0C9;
 }
 
@@ -23,7 +24,7 @@ body{
 }
 
 /*-----TYPOGRAFIE-----*/
-h1, h2, h3, h4 {
+h1, h2, h3, h4, label {
   font-family: "Coiny", serif;
   color: var(--text-color);
 }
@@ -35,13 +36,16 @@ p {
 }
 
 /*-----BUTTONS & LINKS-----*/
-button, input, input::placeholder{
+button, input, input::placeholder, textarea, select{
   font-family: "Coiny", serif;
   color: var(--background-color);
 }
 
-input{
-
+.text-field-red {
+  background-color: var(--tertiary-color-30);
+  border-radius: 20px;
+  border: none;
+  padding: 7px;
 }
 
 ul {
@@ -51,4 +55,8 @@ ul {
 a, a:visited {
   text-decoration: none;
   color: var(--text-color);
+}
+
+.error-message{
+  color: var(--tertiary-color);
 }

@@ -1,9 +1,104 @@
-.new-post-container{
-    background-color: var(--primary-color-20);
-    padding: 50px;
+/*-----Flexbox-----*/
+
+.new-post-container,.form-field-right, .form-field-left, .form-field-right label, .form-field-left label{
+    display: flex;
+    flex-direction: column;
 }
 
-/*
-form{
+.outer-container, .form-fields, .preview-buttons, .placeholder, .placeholder-img, .buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.outer-container, .form-field-left{
+    justify-content: center;
+}
+
+.preview-buttons, .placeholder, .buttons{
+    justify-content: space-between;
+}
+
+.form-field-left, .form-field-left label, .buttons{
+    align-items: center;
+}
+
+/*-----border radius-----*/
+
+.new-post-container, .form-fields, .placeholder-img, .preview-img{
+    border-radius: 20px;
+}
+
+/*-----Outer container-----*/
+
+.outer-container{
+    margin: 30px 0;
+}
+/*-----New post container-----*/
+
+.new-post-container{
+    background-color: var(--primary-color-20);
+    padding: 37px;
+    align-items: flex-end;
+}
+
+/*-----Form-----*/
+
+.form-fields{
     background-color: var(--background-color);
-}*/
+    flex-basis: 832px;
+}
+
+.form-field-right, .form-field-left{
+    width: 416px;
+    height: 467px;
+    padding: 30px 45px;
+}
+
+.form-field-right {
+    justify-content: space-evenly;
+    border-left: 2px solid var(--text-color-30) ;
+}
+
+.form-field-left{
+    position: relative;
+}
+
+.form-field-left input {
+    visibility: hidden;
+}
+
+.form-field-left label {
+    gap: 10px;
+}
+
+/*-----Preview images -----*/
+.preview-buttons{
+    padding-top: 20px;
+}
+
+.placeholder{
+    width: 390px;
+}
+
+.placeholder-img{
+    width: 116px;
+    height: 87px;
+    background-color: var(--background-color);
+}
+
+.preview-img{
+    width: 100%;
+}
+
+.delete-img{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/*-----Buttons-----*/
+
+.buttons{
+    width: 390px;
+}
+

@@ -1,7 +1,10 @@
-function Select({selectId, labelName, validationRules, options, register, errors}) {
+import "./Select.css";
+
+function Select({className, selectId, labelName, validationRules, options, register, errors}) {
     return (<>
-        <label htmlFor={selectId}>{labelName}</label>
+        <label htmlFor={selectId}>{labelName}
         <select
+            className={className}
             id={selectId}
             {...register(selectId, validationRules)}
         >
@@ -10,7 +13,8 @@ function Select({selectId, labelName, validationRules, options, register, errors
             })}
 
         </select>
-        {errors[selectId] && <p>{errors[selectId].message}</p>}
+        {errors[selectId] && <p className="error-message">{errors[selectId].message}</p>}
+        </label>
     </>)
 }
 
