@@ -1,12 +1,32 @@
 .account-container{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.post-overview, .user-card, .notifications{
+.user-card, .notifications{
     border: 3px solid red;
-    padding: 30px 50px;
+    padding: 30px 0;
+    width: 338px;
+}
+
+
+.post-overview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 870px;
+    border-radius: 20px;
+}
+.maps{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.overview, .maps{
+    width: 794px;
+    padding: 10px 0;
 }
 
 .post-overview, .user-card{

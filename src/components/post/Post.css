@@ -1,9 +1,13 @@
 
 /*-----Post-----*/
-.post {
+.post-large {
     max-width: 224px;
     margin-bottom: 45px;
 
+}
+.post-small{
+    max-width: 187px;
+    margin-bottom: 15px;
 }
 
 .image-wrapper{
