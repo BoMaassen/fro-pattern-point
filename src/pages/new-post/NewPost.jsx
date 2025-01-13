@@ -76,7 +76,7 @@ function NewPost() {
                             } : false,
                         }} type="text" register={register} errors={errors}/>
 
-                        <Select className="text-field-red " selectId="category" labelName="Categorie" validationRules={{
+                        <Select className="text-field-red" selectId="category" labelName="Categorie" validationRules={{
                             required: !isDraft ? {value: true, message: "Je moet een categorie kiezen"} : false,
                         }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]}
                                 register={register} errors={errors}/>
@@ -104,8 +104,8 @@ function NewPost() {
                                 <div className="placeholder-img"></div>
                             </div>}
                         <div className="buttons">
-                            <Button classname="text-button" type="submit" onClick={() => toggleIsDraft(true)} text="Concept"/>
-                            <Button classname="text-button" type="submit" onClick={() => toggleIsDraft(false)} text="Uploaden"/>
+                            <Button classname="text-button yellow" type="submit" onClick={() => toggleIsDraft(true)} text="Concept"/>
+                            <Button classname="text-button orange" type="submit" onClick={() => toggleIsDraft(false)} text="Uploaden"/>
                         </div>
                     </div>
                 </form>

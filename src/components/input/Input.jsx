@@ -1,3 +1,5 @@
+import './Input.css';
+
 function Input({className, inputId, labelName, validationRules, multiple, onChange, type, accept, register, errors, children}){
     return(
         <>

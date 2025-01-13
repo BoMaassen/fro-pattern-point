@@ -23,6 +23,25 @@ body{
   background-color: var(--background-color);
 }
 
+/*-----kleuren-----*/
+
+.yellow{
+  background-color: var(--secondary-color);
+}
+
+.orange{
+  background-color: var(--primary-color);
+}
+
+.red{
+  background-color: var(--tertiary-color);
+}
+
+.blue{
+  background-color: var(--text-color);
+}
+
+
 /*-----TYPOGRAFIE-----*/
 h1, h2, h3, h4, label {
   font-family: "Coiny", serif;
@@ -35,28 +54,31 @@ p {
 
 }
 
-/*-----BUTTONS & LINKS-----*/
+/*-----BUTTONS-----*/
 button, input, input::placeholder, textarea, select{
   font-family: "Coiny", serif;
   color: var(--background-color);
 }
 
+/*-----Input-----*/
 .text-field-red {
   background-color: var(--tertiary-color-30);
   border-radius: 20px;
   border: none;
-  padding: 7px;
 }
 
-ul {
-  list-style-type: none;
-}
-
+/*-----Links-----*/
 a, a:visited {
   text-decoration: none;
   color: var(--text-color);
 }
 
+/*-----Lists-----*/
+ul {
+  list-style-type: none;
+}
+
+/*-----Message-----*/
 .error-message{
   color: var(--tertiary-color);
 }

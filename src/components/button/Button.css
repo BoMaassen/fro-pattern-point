@@ -5,7 +5,6 @@
 }
 
 .text-button {
-    background-color: var(--primary-color);
     border: none;
     border-radius: 20px;
     padding: 10px 45px;
