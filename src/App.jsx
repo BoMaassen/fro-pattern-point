@@ -4,6 +4,7 @@ import userIcon from './assets/icons/User Circle Single.svg';
 import magnifyingGlass from './assets/icons/Magnifying Glass.svg'
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/home/Home.jsx";
+import NewPost from "./pages/new-post/NewPost.jsx";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             </header>
             <Routes>
                 <Route path="/" element={<Home/>}></Route>
+                <Route path="/new-post" element={<NewPost/>}></Route>
             </Routes>
         </>
     )
