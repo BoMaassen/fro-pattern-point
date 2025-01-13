@@ -63,8 +63,12 @@
     position: relative;
 }
 
-.form-field-left input {
-    visibility: hidden;
+.form-field-left span{
+    position: absolute;
+}
+
+.form-field-left input{
+    opacity: 0;
 }
 
 .form-field-left label {

@@ -45,28 +45,28 @@ function NewPost() {
                 <div className="new-post-container">
                 <Button classname="icon-button" type="button" img={closeIcon} alt="Sluit icoon"/>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
-
                     <div className="form-fields">
-                        {filePreviews.length > 0 ?
-                            <span className="form-field-left">
+                        <div className="form-field-left">
+                            <Input inputId="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
+                                required: {value: true, message: "Je moet een foto uploaden"},
+                            }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
+                                   errors={errors} onChange={preview}>
+                                <img src={uploadIcon} alt="upload button"/>
+                            </Input>
+
+                            {filePreviews.length > 0 &&  <span className="form-field-left">
                                 <img className="preview-img" src={filePreviews[0]} alt="peview img"/>
-                                <Button classname="icon-button delete-img" type="button" img={closeIcon} alt="Sluit icoon" onClick={(()=> setFilePreview([]))}/>
-                            </span>:
-                            <div className="form-field-left">
-                                <Input className="text-field-red" inputId="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
-                                    required: {value: true, message: "Je moet een foto uploaden"},
-                                }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
-                                       errors={errors} onChange={preview}>
-                                    <img src={uploadIcon} alt="upload button"/>
-                                </Input>
+                                <Button classname="icon-button delete-img" type="button" img={closeIcon}
+                                        alt="Sluit icoon" onClick={(() => setFilePreview([]))}/>
+                            </span>
+                            }
 
-                            </div>
+                        </div>
 
-                        }
                         <div className="form-field-right">
                             <Input className="text-field-red" inputId="title" labelName="Titel" validationRules={{
                                 required: !isDraft ? {value: true, message: "Titel is verplicht"} : false,
-                            minLength: !isDraft ? {
+                                minLength: !isDraft ? {
                                 value: 5,
                                 message: "Titel moet minstens 5 karakters bevatten"
                             } : false,
@@ -92,11 +92,11 @@ function NewPost() {
                                 message: "Beschrijving mag maximaal 300 karakters bevatten"
                             } : false,
                         }} register={register} errors={errors}/>
-                    </div>
+                  </div>
                     </div>
                     <div className="preview-buttons">
                         {filePreviews.length > 1 ?
-                            filePreviews?.slice(1).map((filePreview) => {
+                            filePreviews?.slice(1, 4).map((filePreview) => {
                                 return <span key={filePreview} className="placeholder-img"><img className="preview-img" src={filePreview}  alt="peview img" ></img></span>
                             }) : <div className="placeholder">
                                 <div className="placeholder-img"></div>
@@ -116,3 +116,4 @@ function NewPost() {
 }
 
 export default NewPost;
+
