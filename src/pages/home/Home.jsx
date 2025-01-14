@@ -14,8 +14,8 @@ function Home() {
         let masonryInstance;
         imagesLoaded('.feed-container', () => {
             masonryInstance = new Masonry('.feed-container', {
-                itemSelector: ".post",
-                columnWidth: ".post",
+                itemSelector: ".post-large",
+                columnWidth: ".post-large",
                 gutter: 45,
             });
         });
@@ -51,7 +51,7 @@ function Home() {
             </section>
             <section className="feed-container">
                 {posts.map((post)=> (
-                    <Post title={post.title} img={post.imageSrc} alt={post.altText} profilePiture={post.userIcon} username={post.username} key={post.id}/>
+                    <Post className="post-large" title={post.title} img={post.imageSrc} alt={post.altText} profilePiture={post.userIcon} username={post.username} key={post.id}/>
 )
                 )}
             </section>

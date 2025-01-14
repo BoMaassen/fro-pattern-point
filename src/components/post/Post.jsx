@@ -1,7 +1,7 @@
 import './Post.css';
-function Post({title, img, alt, profilePiture, username, key}) {
+function Post({title, img, alt, profilePiture, username, key, className}) {
     return(
-    <article key={key} className="post">
+    <article key={key} className={className}>
         <span className="image-wrapper"><img src={img} alt={alt}/></span>
         <div className="post-info">
             <h3>{title}</h3>
