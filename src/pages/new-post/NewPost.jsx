@@ -7,9 +7,11 @@ import Button from "../../components/button/Button.jsx";
 import "./NewPost.css";
 import closeIcon from "../../assets/icons/close icon.svg"
 import uploadIcon from "../../assets/icons/upload icon.svg"
+import {useNavigate} from "react-router-dom";
 
 function NewPost() {
     const {register, handleSubmit, formState: {errors}} = useForm();
+    const navigate = useNavigate();
     const [isDraft, toggleIsDraft] = useState(false);
     const [filePreviews, setFilePreview] = useState([]);
 
@@ -28,6 +30,7 @@ function NewPost() {
                 reader.readAsDataURL(file);
             }
         }
+
     }
 
     function handleFormSubmit(data) {
@@ -37,6 +40,8 @@ function NewPost() {
         } else {
             console.log("Bericht geüpload:", formData);
         }
+        navigate("/account");
+
     }
 
     return (
