@@ -6,30 +6,30 @@ import {Route, Routes} from "react-router-dom";
 import Home from "./pages/home/Home.jsx";
 import NewPost from "./pages/new-post/NewPost.jsx";
 import Account from "./pages/account/Account.jsx";
+import Button from "./components/button/Button.jsx";
+
+
+
 
 
 function App() {
-
     return (
         <>
             <header>
             <nav className="nav-bar">
                 <h2 className="nav-logo">Pattern Point</h2>
                 <div className="nav-search-bar">
+
                     <label htmlFor="searchbar">
                         <input id="searchbar" name="searchbar" placeholder="zoeken..."/>
                     </label>
-                    <button type="button">
-                        <img src={magnifyingGlass} alt='Vergrootglas icoon'/>
-                    </button>
+                    
+
+                    <Button classname="search-button" type="button" img={magnifyingGlass} alt="Vergrootglas icoon"/>
                 </div>
                 <div className="nav-icons">
-                    <button className="user-icon" type="button">
-                        <img src={addIcon} alt="Content uploaden icoon"/>
-                    </button>
-                    <button className="add-icon" type="button">
-                        <img src={userIcon} alt="Profiel icoon"/>
-                    </button>
+                    <Button classname="add-icon" type="button" img={addIcon} alt="Content uploaden icoon"/>
+                    <Button classname="user-icon" type="button" img={userIcon} alt="Profiel icoon"/>
                 </div>
             </nav>
             </header>

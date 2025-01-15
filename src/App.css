@@ -23,7 +23,7 @@
     padding: 6.75px 66.5px 6.75px 30px;
 }
 
-.nav-search-bar button {
+.search-button {
     background-color: var(--tertiary-color);
     border-radius: 0 20px 20px 0;
     padding: 8px 12px 8px 8px;
@@ -32,7 +32,8 @@
 /*-----ICON BUTTONS-----*/
 
 .nav-icons {
-    padding: 0 25.65px;
+    flex-basis: 167px;
+    justify-content: end;
 }
 
 .add-icon, .user-icon {
