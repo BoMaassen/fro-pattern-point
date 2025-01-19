@@ -8,8 +8,10 @@ import NewPost from "./pages/new-post/NewPost.jsx";
 import Account from "./pages/account/Account.jsx";
 import Button from "./components/button/Button.jsx";
 
+
 function App() {
     const navigate = useNavigate();
+
     return (
         <>
             <header>

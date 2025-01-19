@@ -8,6 +8,7 @@ import "./NewPost.css";
 import closeIcon from "../../assets/icons/close icon.svg"
 import uploadIcon from "../../assets/icons/upload icon.svg"
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function NewPost() {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -20,13 +21,13 @@ function NewPost() {
         const files = event.target.files
         const fileArray = [...files];
         const urlsArray = fileArray.map((file) => {
-            return {url: URL.createObjectURL(file), name: file.name,}
+            return {url: URL.createObjectURL(file), fileName: file.name,}
         })
         setUrls(urlsArray);
     }
 
-    function handleFormSubmit(data) {
-        const formData = {...data, isDraft};
+   /* function handleFormSubmit(data) {
+        const formData = {...data, isDraft, urls};
         if (isDraft) {
             console.log("Concept opgeslagen:", formData);
         } else {
@@ -34,7 +35,30 @@ function NewPost() {
         }
         navigate("/account");
 
+    }*/
+
+
+   async function handleFormSubmit(data) {
+
+       try {
+           const result = await axios.post("http://localhost:8080/posts",
+               {
+               title: data.title,
+               category: data.category,
+               description: data.description,
+               isDraft: data.isDraft,
+               images: urls
+
+               });
+           console.log(result.data);
+       } catch (e){
+           console.log("er ging wat fout " + e);
+       }
+
+       navigate("/account");
+
     }
+
 
     return (
         <main>
