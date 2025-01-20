@@ -26,19 +26,8 @@ function NewPost() {
         setUrls(urlsArray);
     }
 
-   /* function handleFormSubmit(data) {
-        const formData = {...data, isDraft, urls};
-        if (isDraft) {
-            console.log("Concept opgeslagen:", formData);
-        } else {
-            console.log("Bericht geüpload:", formData);
-        }
-        navigate("/account");
-
-    }*/
-
-
    async function handleFormSubmit(data) {
+
 
        try {
            const result = await axios.post("http://localhost:8080/posts",
@@ -58,7 +47,6 @@ function NewPost() {
        navigate("/account");
 
     }
-
 
     return (
         <main>

@@ -4,7 +4,8 @@ function Input({className, inputId, labelName, validationRules, multiple, onChan
     return(
         <>
 
-            <label htmlFor={inputId}>{children}
+            <label htmlFor={inputId}>
+                {children}
                 {labelName}
             <input
                 className={className}
