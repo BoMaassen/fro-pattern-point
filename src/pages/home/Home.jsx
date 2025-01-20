@@ -3,12 +3,13 @@ import filterIcon from '../../assets/icons/Filter-icon.svg'
 import arrowDown from '../../assets/icons/arrow down.svg'
 import arrowButton from '../../assets/icons/arrow-button.svg'
 import Masonry from 'masonry-layout';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import imagesLoaded from "imagesloaded";
-import {posts} from "../../constance/posts.js";
 import Post from "../../components/post/Post.jsx";
+import axios from "axios";
 
 function Home() {
+   const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         let masonryInstance;
@@ -25,7 +26,23 @@ function Home() {
                 masonryInstance.destroy();
             }
         };
+
+    }, [posts]);
+
+    useEffect(() => {
+        async function fetchPosts(){
+            try {
+                const result = await axios.get("http://localhost:8080/posts")
+                setPosts(result.data);
+            }
+            catch (e){
+                console.log("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
+            }
+        }
+        fetchPosts();
+
     }, []);
+
 
     return (
         <main>
@@ -51,7 +68,7 @@ function Home() {
             </section>
             <section className="feed-container">
                 {posts.map((post)=> (
-                    <Post className="post-large" title={post.title} img={post.imageSrc} alt={post.altText} profilePiture={post.userIcon} username={post.username} key={post.id}/>
+                    <Post className="post-large" title={post.title} img={post.images[0].url} alt={post.images[0].fileName} profilePiture={post.userIcon} username={post.username} key={post.id}/>
 )
                 )}
             </section>
