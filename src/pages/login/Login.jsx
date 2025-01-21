@@ -3,26 +3,44 @@ import Button from "../../components/button/Button.jsx";
 import profilePicture from "../../assets/icons/User Circle blue.svg";
 import Input from "../../components/input/Input.jsx";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function Login(){
-    const {register, formState: {errors}} = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm();
+    const navigate = useNavigate();
+
+    async function handleLoginSubmit(data) {
+        try {
+            const result = await axios.post("http://localhost:8080/login",
+                {
+                    userName: data.username,
+                    password: data.password,
+
+                });
+            console.log(result);
+        } catch (e){
+            console.log("er ging wat fout " + e);
+        }
+
+        navigate("/");
+    }
 
     return <main>
         <section className="login-section">
 
-                <form className="login-form">
+                <form onSubmit={handleSubmit(handleLoginSubmit)} className="login-form">
                     <div className="upper-part">
                     <img src={profilePicture} alt="Profiel foto"/>
                     <div className="fields">
                         <Input className="text-field-red" inputId="username" labelName="Gebruikersnaam"
                                validationRules={{
-                                   required: {value: true, message: "Gebruikersnaam is verplicht"},
+                                   required: {value: true, message: "Gebruikersnaam is verplicht"}
                                }} type="text" register={register} errors={errors}/>
 
                         <Input className="text-field-red" inputId="password" labelName="Wachtwoord" validationRules={{
-                            required: {value: true, message: "Wachtwoord is verplicht"},
-                        }} type="text" register={register} errors={errors}/>
+                            required: {value: true, message: "Wachtwoord is verplicht"}
+                        }} type="password" register={register} errors={errors}/>
 
                     </div>
                     <Link className="reset-password" to={"/"}>Wachtwoord vergeten?</Link>
