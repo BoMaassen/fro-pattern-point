@@ -1,4 +1,55 @@
-.login-container{
+.login-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.login-form{
     background-color: var(--primary-color-20);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 510px;
+    height: 600px;
+    padding: 40px;
+}
+
+.upper-part{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 300px;
+
 
 }
+
+.fields{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 390px;
+    padding: 5px;
+}
+
+.fields label{
+    padding: 20px 0;
+}
+
+.fields input{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    width: 337px;
+}
+
+a.reset-password {
+    font-weight: bold;
+    text-decoration: underline;
+
+}
+
+
