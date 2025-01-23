@@ -5,10 +5,13 @@ import Input from "../../components/input/Input.jsx";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {useContext} from "react";
+import {AuthContext} from "../../assets/context/AuthContect.jsx";
 
 function Login(){
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
+    const {login} = useContext(AuthContext);
 
     async function handleLoginSubmit(data) {
         try {
@@ -19,6 +22,7 @@ function Login(){
 
                 });
             console.log("het resultaat ", result.headers.authorization);
+            login(result.headers.authorization);
 
         } catch (e){
             console.log("er ging wat fout " + e);
