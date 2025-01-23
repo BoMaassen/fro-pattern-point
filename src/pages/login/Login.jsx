@@ -18,12 +18,13 @@ function Login(){
                     password: data.password,
 
                 });
-            console.log(result);
+            console.log("het resultaat ", result.headers.authorization);
+
         } catch (e){
             console.log("er ging wat fout " + e);
         }
 
-        navigate("/");
+       /* navigate("/");*/
     }
 
     return <main>
