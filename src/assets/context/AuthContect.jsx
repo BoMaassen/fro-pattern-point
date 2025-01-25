@@ -1,6 +1,7 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
+import {useNavigate} from "react-router-dom";
 
 export const AuthContext = createContext({});
 
@@ -18,6 +19,23 @@ function AuthContextProvider({children}){
         login: login,
         logOut: logOut,
     }
+
+    useEffect(() => {
+        console.log("aplicatie refresht")
+        const token = localStorage.getItem('token');
+
+        if (token && isTokenValid(token)){
+            void login(token);
+
+        }else{
+            setAuth({
+                isAuth: false,
+                user: null,
+                status: 'done',
+            });
+
+        }
+    }, []);
 
     async function login(token){
         localStorage.setItem('token', token);
@@ -44,10 +62,22 @@ function AuthContextProvider({children}){
 
         }catch (e){
             console.error(e + " Er is wat fout gegaan.")
+
         }
         console.log("Gebruiker is ingelogd!");
         navigate("/profile");
 
+    }
+
+    function logOut(){
+        localStorage.removeItem("token")
+        setAuth({
+            isAuth: false,
+            user: null,
+            status: "done",
+        })
+        console.log("Gebruiker is uitgelogd")
+        navigate("/");
     }
 
     return (

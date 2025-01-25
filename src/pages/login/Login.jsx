@@ -3,14 +3,13 @@ import Button from "../../components/button/Button.jsx";
 import profilePicture from "../../assets/icons/User Circle blue.svg";
 import Input from "../../components/input/Input.jsx";
 import {useForm} from "react-hook-form";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import {useContext} from "react";
 import {AuthContext} from "../../assets/context/AuthContect.jsx";
 
 function Login(){
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const navigate = useNavigate();
     const {login} = useContext(AuthContext);
 
     async function handleLoginSubmit(data) {
@@ -27,8 +26,6 @@ function Login(){
         } catch (e){
             console.log("er ging wat fout " + e);
         }
-
-       /* navigate("/");*/
     }
 
     return <main>
