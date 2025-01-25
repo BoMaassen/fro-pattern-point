@@ -2,6 +2,7 @@ import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 import {useNavigate} from "react-router-dom";
+import isTokenValid from "../../helpers/isTokenValid.js";
 
 export const AuthContext = createContext({});
 
@@ -40,12 +41,13 @@ function AuthContextProvider({children}){
     async function login(token){
         localStorage.setItem('token', token);
         const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
 
         try {
             const result = await axios.get(`http://localhost:8080/users/${decodedToken.sub}`,{
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: token
                 }
             })
 
@@ -65,7 +67,7 @@ function AuthContextProvider({children}){
 
         }
         console.log("Gebruiker is ingelogd!");
-        navigate("/profile");
+        navigate("/account");
 
     }
 

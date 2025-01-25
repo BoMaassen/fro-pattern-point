@@ -27,7 +27,7 @@ function NewPost() {
     }
 
    async function handleFormSubmit(data) {
-
+       const token = localStorage.getItem('token');
 
        try {
            const result = await axios.post("http://localhost:8080/posts",
@@ -38,6 +38,11 @@ function NewPost() {
                isDraft: data.isDraft,
                images: urls
 
+               }, {
+                   headers: {
+                       "Content-Type": "application/json",
+                       Authorization: token
+                   }
                });
            console.log(result.data);
        } catch (e){
