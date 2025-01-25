@@ -35,12 +35,12 @@ function Login(){
                     <div className="upper-part">
                     <img src={profilePicture} alt="Profiel foto"/>
                     <div className="fields">
-                        <Input className="text-field-red" inputId="username" labelName="Gebruikersnaam"
+                        <Input className="text-field-red" inputId="username" name="username" labelName="Gebruikersnaam"
                                validationRules={{
                                    required: {value: true, message: "Gebruikersnaam is verplicht"}
                                }} type="text" register={register} errors={errors}/>
 
-                        <Input className="text-field-red" inputId="password" labelName="Wachtwoord" validationRules={{
+                        <Input className="text-field-red" inputId="password" name="password" labelName="Wachtwoord" validationRules={{
                             required: {value: true, message: "Wachtwoord is verplicht"}
                         }} type="password" register={register} errors={errors}/>
 

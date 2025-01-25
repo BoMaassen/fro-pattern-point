@@ -61,7 +61,7 @@ function NewPost() {
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">
-                                <Input inputId="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
+                                <Input inputId="content-img" name="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
                                     required: {value: true, message: "Je moet een foto uploaden"},
                                 }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
                                        errors={errors} onChange={fileToUrl}>
@@ -78,7 +78,7 @@ function NewPost() {
                             </div>
 
                             <div className="form-field-right">
-                                <Input className="text-field-red" inputId="title" labelName="Titel" validationRules={{
+                                <Input className="text-field-red" inputId="title" name="title" labelName="Titel" validationRules={{
                                     required: !isDraft ? {value: true, message: "Titel is verplicht"} : false,
                                     minLength: !isDraft ? {
                                         value: 5,

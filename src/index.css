@@ -43,7 +43,7 @@ body{
 
 
 /*-----TYPOGRAFIE-----*/
-h1, h2, h3, h4, label, a {
+h1, h2, h3, h4, label, a, legend {
   font-family: "Coiny", serif;
   color: var(--text-color);
 }

@@ -8,6 +8,7 @@ import NewPost from "./pages/new-post/NewPost.jsx";
 import Account from "./pages/account/Account.jsx";
 import Button from "./components/button/Button.jsx";
 import Login from "./pages/login/Login.jsx";
+import SignUp from "./pages/sign-up/SignUp.jsx";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/new-post" element={<NewPost/>}></Route>
                 <Route path="/account" element={<Account/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
+                <Route path="/sign-up" element={<SignUp/>}></Route>
             </Routes>
         </>
     )
