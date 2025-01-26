@@ -3,13 +3,15 @@ import filterIcon from '../../assets/icons/Filter-icon.svg'
 import arrowDown from '../../assets/icons/arrow down.svg'
 import arrowButton from '../../assets/icons/arrow-button.svg'
 import Masonry from 'masonry-layout';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import imagesLoaded from "imagesloaded";
 import Post from "../../components/post/Post.jsx";
 import axios from "axios";
+import {AuthContext} from "../../assets/context/AuthContect.jsx";
 
 function Home() {
    const [posts, setPosts] = useState([]);
+    const {user} = useContext(AuthContext);
 
     useEffect(() => {
         let masonryInstance;
@@ -30,9 +32,15 @@ function Home() {
     }, [posts]);
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
         async function fetchPosts(){
             try {
-                const result = await axios.get("http://localhost:8080/posts")
+                const result = await axios.get("http://localhost:8080/posts",
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: token,
+                        }})
                 setPosts(result.data);
             }
             catch (e){
@@ -68,7 +76,7 @@ function Home() {
             </section>
             <section className="feed-container">
                 {posts.map((post)=> (
-                    <Post className="post-large" title={post.title} img={post.images[0].url} alt={post.images[0].fileName} profilePiture={post.userIcon} username={post.username} key={post.id}/>
+                    <Post className="post-large" title={post.title} img={post.images[0].url} alt={post.images[0].fileName} profilePiture={post.userIcon} username={user.username} key={post.id}/>
 )
                 )}
             </section>

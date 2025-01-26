@@ -43,7 +43,7 @@ body{
 
 
 /*-----TYPOGRAFIE-----*/
-h1, h2, h3, h4, label {
+h1, h2, h3, h4, label, a, legend {
   font-family: "Coiny", serif;
   color: var(--text-color);
 }
@@ -65,6 +65,11 @@ button, input, input::placeholder, textarea, select{
   background-color: var(--tertiary-color-30);
   border-radius: 20px;
   border: none;
+}
+
+/*-----Label-----*/
+label{
+  font-size: 20px;
 }
 
 /*-----Links-----*/
