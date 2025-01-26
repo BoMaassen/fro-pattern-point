@@ -2,17 +2,20 @@ import './App.css'
 import addIcon from './assets/icons/Add Circle.svg' ;
 import userIcon from './assets/icons/User Circle Single.svg';
 import magnifyingGlass from './assets/icons/Magnifying Glass.svg'
-import {Link, Route, Routes, useNavigate} from "react-router-dom";
+import {Link, Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import Home from "./pages/home/Home.jsx";
 import NewPost from "./pages/new-post/NewPost.jsx";
 import Account from "./pages/account/Account.jsx";
 import Button from "./components/button/Button.jsx";
 import Login from "./pages/login/Login.jsx";
 import SignUp from "./pages/sign-up/SignUp.jsx";
+import {AuthContext} from "./assets/context/AuthContect.jsx";
+import {useContext} from "react";
 
 
 function App() {
     const navigate = useNavigate();
+    const {isAuth} = useContext(AuthContext);
 
     return (
         <>
@@ -33,9 +36,9 @@ function App() {
             </nav>
             </header>
             <Routes>
-                <Route path="/" element={<Home/>}></Route>
-                <Route path="/new-post" element={<NewPost/>}></Route>
-                <Route path="/account" element={<Account/>}></Route>
+                <Route path="/" element={isAuth ? <Home/> : <Navigate to="/sign-up"/> }></Route>
+                <Route path="/new-post" element={isAuth ? <NewPost/> : <Navigate to="/sign-up"/>}></Route>
+                <Route path="/account" element={isAuth ? <Account/> : <Navigate to="/sign-up"/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/sign-up" element={<SignUp/>}></Route>
             </Routes>
