@@ -3,7 +3,7 @@ import Button from "../../components/button/Button.jsx";
 import profilePicture from "../../assets/icons/User Circle blue.svg";
 import Input from "../../components/input/Input.jsx";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useContext} from "react";
 import {AuthContext} from "../../assets/context/AuthContect.jsx";
@@ -11,6 +11,7 @@ import {AuthContext} from "../../assets/context/AuthContect.jsx";
 function Login(){
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     async function handleLoginSubmit(data) {
         try {
@@ -45,12 +46,12 @@ function Login(){
                         }} type="password" register={register} errors={errors}/>
 
                     </div>
-                    <Link className="reset-password" to={"/"}>Wachtwoord vergeten?</Link>
+                    <Link className="reset-password" to={"/sign-up"}>Wachtwoord vergeten?</Link>
                     </div>
 
                     <div className="buttons">
 
-                        <Button classname="text-button yellow" type="button" text="Account aanmaken?"/>
+                        <Button classname="text-button yellow" type="button" onClick={() => {navigate("/sign-up")}} text="Account aanmaken?"/>
 
                         <Button classname="text-button orange" type="submit" text="Inloggen"/>
                     </div>

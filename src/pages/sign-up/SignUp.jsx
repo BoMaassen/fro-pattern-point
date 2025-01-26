@@ -30,7 +30,7 @@ function SignUp(){
                 }
             );
             console.log("Succesvol geregistreerd");
-           /* navigate("/login")*/
+            navigate("/login")
         } catch (e) {
             console.error(e + " Er ging wat fout met het ophalen")
         }
@@ -74,7 +74,7 @@ function SignUp(){
 
                 <div className="buttons">
 
-                    <Button classname="text-button yellow" type="button" text="Inloggen?"/>
+                    <Button classname="text-button yellow" type="button" onClick={() => {navigate("/login")}} text="Inloggen?"/>
 
                     <Button classname="text-button orange" type="submit" text="Aanmaken"/>
                 </div>
