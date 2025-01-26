@@ -16,7 +16,7 @@ function Input({className, inputId, name, labelName, validationRules, multiple, 
                 multiple={multiple}
                 onChange={onChange}
                 value={value}
-                checked={checked}
+                defaultChecked={checked}
             />
             {errors[inputId] && <p className="error-message">{errors[inputId].message}</p>}
             </label>

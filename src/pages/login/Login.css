@@ -39,7 +39,7 @@
     padding: 15px 0;
 }
 
-.fields input{
+.form-field{
     display: flex;
     flex-direction: row;
     align-items: start;
