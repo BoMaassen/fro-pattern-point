@@ -15,21 +15,22 @@ function Account(){
         const token = localStorage.getItem('token');
         async function fetchPosts(){
             try {
-                const result = await axios.get("http://localhost:8080/posts", {
+                const response = await axios.get("http://localhost:8080/posts", {
                     headers: {
-                        "Content-Type": "application/json",
                         Authorization: token,
                     }})
-                setPosts(result.data);
+
+                setPosts(response.data);
+                console.log(response.data);
+
             }
             catch (e){
-                console.log("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
+                console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
             }
         }
         fetchPosts();
 
     }, []);
-
 
     useEffect(() => {
         let masonryInstance;
@@ -47,23 +48,31 @@ function Account(){
             }
         };
     }, [posts]);
+
+
     return ( <main>
 <h1>Account</h1>
             <section className="account-container">
                 <div className="post-overview" >
                     <div className="maps"><h2>placeholder voor buttons</h2></div>
-                    <div className="overview"> {posts.map((post)=> (
-                            <Post className="post-small" title={post.title} img={post.images[0].url} alt={post.images[0].fileName} username={user.username} key={post.id}/>
-                        )
-                    )}</div>
-                </div>
+                    <div className="overview"> {posts.map((post) => {
+                        return <div key={post.id}>
+                            {post.image && <Post className="post-small" title={post.title} img={post.image.url}
+                                                 alt={post.image.title} profilePiture={user.userIcon} username={user.username}
+                                                 key={post.id}/>}
+                        </div>
+                    })}
+                    </div>
+            </div>
 
-                <div>
-                <div className="user-card"><h2>{user.username} {user.biography} </h2></div>  {/*user card*/}
-                <div className="notifications"><h2>placeholder voor meldingen</h2></div> {/*meldingen*/}
+        <div>
+            <div className="user-card"><h2>{user.username} {user.biography} </h2></div>
+            {/*user card*/}
+            <div className="notifications"><h2>placeholder voor meldingen</h2></div> {/*meldingen*/}
                 </div>
 
             </section>
+
 
 
         </main>
