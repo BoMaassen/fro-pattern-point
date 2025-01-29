@@ -60,6 +60,7 @@ function NewPost() {
     useEffect(() => {
         async function sendImage() {
             if (!postId || postId === 0) return;
+            const token = localStorage.getItem('token');
             const formData = new FormData();
             formData.append("file", files[0]);
             console.log(files[0])
@@ -68,6 +69,7 @@ function NewPost() {
                 const result = await axios.post(`http://localhost:8080/posts/${postId}/image`, formData,
                     {
                         headers: {
+                            Authorization: token,
                             "Content-Type": "multipart/form-data"
                         },
                     })
