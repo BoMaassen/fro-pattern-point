@@ -74,11 +74,12 @@ function Home() {
                                                                                alt="pijl naar beneden icoon"/></button>
                 </div>
             </section>
-            <section className="feed-container">
-                {posts.map((post)=> (
-                    <Post className="post-large" title={post.title} img={post.images[0].url} alt={post.images[0].fileName} profilePiture={post.userIcon} username={user.username} key={post.id}/>
-)
-                )}
+            <section className="feed-container">{posts.map((post) => {
+                    return <div key={post.id}>
+                        {post.image && <Post className="post-small" title={post.title} img={post.image.url}
+                                             alt={post.image.title} profilePiture={user.userIcon} username={user.username}
+                                             key={post.id}/>}
+                    </div>})}
             </section>
         </main>
 

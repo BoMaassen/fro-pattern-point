@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Input from "../../components/input/Input.jsx";
 import Select from "../../components/select/Select.jsx";
 import Textarea from "../../components/textarea/Textarea.jsx";
@@ -15,43 +15,72 @@ function NewPost() {
     const navigate = useNavigate();
     const [isDraft, toggleIsDraft] = useState(false);
     const [urls, setUrls] = useState([]);
+    const [files, setFiles] = useState([]);
+    const [postId, setPostId] = useState(0);
 
 
     function fileToUrl(event) {
         const files = event.target.files
         const fileArray = [...files];
+        setFiles(fileArray);
         const urlsArray = fileArray.map((file) => {
             return {url: URL.createObjectURL(file), fileName: file.name,}
         })
         setUrls(urlsArray);
     }
 
-   async function handleFormSubmit(data) {
-       const token = localStorage.getItem('token');
 
-       try {
-           const result = await axios.post("http://localhost:8080/posts",
-               {
-               title: data.title,
-               category: data.category,
-               description: data.description,
-               isDraft: data.isDraft,
-               images: urls
+        async function handleFormSubmit(data) {
+            const token = localStorage.getItem('token');
+            const formData = {...data, isDraft};
 
-               }, {
-                   headers: {
-                       "Content-Type": "application/json",
-                       Authorization: token
-                   }
-               });
-           console.log(result.data);
-       } catch (e){
-           console.log("er ging wat fout " + e);
-       }
+            try {
+                const result = await axios.post("http://localhost:8080/posts", {
+                    title: formData.title,
+                    category: formData.category,
+                    description: formData.description,
+                    isDraft: formData.isDraft,
+                },{
+                    headers: {
+                        Authorization: token,
+                        "Content-Type": "application/json"
+                    }
+                });
+                console.log(result.data.id);
+                setPostId(result.data.id);
+            } catch (e){
+                console.log("er ging wat fout " + e);
+            }
 
-       navigate("/account");
+            navigate("/account");
 
-    }
+
+        }
+
+    useEffect(() => {
+        async function sendImage() {
+            if (!postId || postId === 0) return;
+            const formData = new FormData();
+            formData.append("file", files[0]);
+            console.log(files[0])
+
+            try {
+                const result = await axios.post(`http://localhost:8080/posts/${postId}/image`, formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        },
+                    })
+                console.log(result.data);
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        void sendImage();
+    }, [postId]);
+
+
+
 
     return (
         <main>
@@ -61,10 +90,11 @@ function NewPost() {
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">
-                                <Input inputId="content-img" name="content-img" labelName="Upload foto's in png of jpeg" validationRules={{
+                                <Input inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
                                     required: {value: true, message: "Je moet een foto uploaden"},
                                 }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
                                        errors={errors} onChange={fileToUrl}>
+                                     {/*6.5 react hook form watch functie*/}
                                     <img src={uploadIcon} alt="upload button"/>
                                 </Input>
 
