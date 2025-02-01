@@ -7,7 +7,7 @@ import {useContext, useEffect, useState} from "react";
 import imagesLoaded from "imagesloaded";
 import Post from "../../components/post/Post.jsx";
 import axios from "axios";
-import {AuthContext} from "../../assets/context/AuthContect.jsx";
+import {AuthContext} from "../../context/AuthContect.jsx";
 
 function Home() {
    const [posts, setPosts] = useState([]);

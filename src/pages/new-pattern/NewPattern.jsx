@@ -1,20 +1,19 @@
-import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
-import Input from "../../components/input/Input.jsx";
-import Select from "../../components/select/Select.jsx";
-import Textarea from "../../components/textarea/Textarea.jsx";
-import Button from "../../components/button/Button.jsx";
-import "./NewPost.css";
-import closeIcon from "../../assets/icons/close icon.svg"
-import uploadIcon from "../../assets/icons/upload icon.svg"
+import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import Button from "../../components/button/Button.jsx";
+import closeIcon from "../../assets/icons/close icon.svg";
+import Input from "../../components/input/Input.jsx";
+import uploadIcon from "../../assets/icons/upload icon.svg";
+import Select from "../../components/select/Select.jsx";
+import Textarea from "../../components/textarea/Textarea.jsx";
 
-function NewPost() {
+function NewPattern(){
     const [isDraft, toggleIsDraft] = useState(false);
     const [urls, setUrls] = useState([]);
     const [files, setFiles] = useState([]);
-    const [postId, setPostId] = useState(0);
+    const [patternId, setPatternId] = useState(0);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
@@ -30,40 +29,40 @@ function NewPost() {
     }
 
 
-        async function handleFormSubmit(data) {
-            const token = localStorage.getItem('token');
-            const formData = {...data, isDraft};
+    async function handleFormSubmit(data) {
+        const token = localStorage.getItem('token');
+        const formData = {...data, isDraft};
 
-            try {
-                const result = await axios.post("http://localhost:8080/posts", {
-                    title: formData.title,
-                    category: formData.category,
-                    description: formData.description,
-                    isDraft: formData.isDraft,
-                },{
-                    headers: {
-                        Authorization: token,
-                        "Content-Type": "application/json"
-                    }
-                });
-                console.log(result.data.id);
-                setPostId(result.data.id);
-                navigate("/account");
-            } catch (e){
-                console.log("er ging wat fout " + e);
-            }
+        try {
+            const result = await axios.post("http://localhost:8080/pattern", {
+                title: formData.title,
+                level: formData.level,
+                description: formData.description,
+                isDraft: formData.isDraft,
+            },{
+                headers: {
+                    Authorization: token,
+                    "Content-Type": "application/json"
+                }
+            });
+            console.log(result.data.id);
+            setPatternId(result.data.id);
+            navigate("/account");
+        } catch (e){
+            console.log("er ging wat fout " + e);
         }
+    }
 
     useEffect(() => {
         async function sendImage() {
-            if (!postId || postId === 0) return;
+            if (!patternId || patternId === 0) return;
             const token = localStorage.getItem('token');
             const formData = new FormData();
             formData.append("file", files[0]);
             console.log(files[0])
 
             try {
-                const result = await axios.post(`http://localhost:8080/posts/${postId}/image`, formData,
+                const result = await axios.post(`http://localhost:8080/patterns/${patternId}/image`, formData,
                     {
                         headers: {
                             Authorization: token,
@@ -79,8 +78,6 @@ function NewPost() {
     }, [postId]);
 
 
-
-
     return (
         <main>
             <section className="outer-container">
@@ -93,7 +90,7 @@ function NewPost() {
                                     required: {value: true, message: "Je moet een foto uploaden"},
                                 }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
                                        errors={errors} onChange={fileToUrl}>
-                                     {/*6.5 react hook form watch functie*/}
+                                    {/*6.5 react hook form watch functie*/}
                                     <img src={uploadIcon} alt="upload button"/>
                                 </Input>
 
@@ -119,13 +116,13 @@ function NewPost() {
                                     } : false,
                                 }} type="text" register={register} errors={errors}/>
 
-                                <Select className="text-field-red" selectId="category" labelName="Categorie"
+                                <Select className="text-field-red" selectId="level" labelName="Niveau"
                                         validationRules={{
                                             required: !isDraft ? {
                                                 value: true,
-                                                message: "Je moet een categorie kiezen"
+                                                message: "Je moet een niveau kiezen"
                                             } : false,
-                                        }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]}
+                                        }} options={["", "Beginner", "Medium", "Gevorderd", "Expert"]}
                                         register={register} errors={errors}/>
 
                                 <Textarea className="text-field-red" textareaId="description" labelName="Beschrijving"
@@ -167,7 +164,8 @@ function NewPost() {
             </section>
         </main>
     );
+
+
 }
 
-export default NewPost;
-
+export default NewPattern;

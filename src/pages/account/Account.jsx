@@ -4,7 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import imagesLoaded from "imagesloaded";
 import Masonry from "masonry-layout";
 import axios from "axios";
-import {AuthContext} from "../../assets/context/AuthContect.jsx";
+import {AuthContext} from "../../context/AuthContect.jsx";
 
 function Account(){
     const [posts, setPosts] = useState([]);
@@ -58,7 +58,7 @@ function Account(){
                     <div className="overview"> {posts.map((post) => {
                         return <div key={post.id}>
                             {post.image && <Post className="post-small" title={post.title} img={post.image.url}
-                                                 alt={post.image.title} profilePiture={user.userIcon} username={user.username}
+                                                 alt={post.image.title} profilePiture={user.userIcon} username={post.username}
                                                  key={post.id}/>}
                         </div>
                     })}

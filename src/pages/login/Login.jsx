@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useContext} from "react";
-import {AuthContext} from "../../assets/context/AuthContect.jsx";
+import {AuthContext} from "../../context/AuthContect.jsx";
 
 function Login(){
     const {register, handleSubmit, formState: {errors}} = useForm();
