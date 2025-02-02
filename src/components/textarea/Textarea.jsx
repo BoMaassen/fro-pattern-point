@@ -1,8 +1,8 @@
-function Textarea({className, textareaId, labelName, validationRules, register, errors}) {
+function Textarea({className, textareaId, labelName, validationRules, rows, register, errors}) {
     return (
         <>
             <label htmlFor={textareaId}>{labelName}
-                <textarea rows="9"
+                <textarea rows={rows}
                           className={className}
                           id={textareaId}
                           {...register(textareaId, validationRules)}

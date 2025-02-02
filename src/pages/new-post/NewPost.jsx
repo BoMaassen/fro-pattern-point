@@ -128,7 +128,7 @@ function NewPost() {
                                         }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]}
                                         register={register} errors={errors}/>
 
-                                <Textarea className="text-field-red" textareaId="description" labelName="Beschrijving"
+                                <Textarea className="text-field-red" textareaId="description" rows="9" labelName="Beschrijving"
                                           validationRules={{
                                               required: !isDraft ? {
                                                   value: true,

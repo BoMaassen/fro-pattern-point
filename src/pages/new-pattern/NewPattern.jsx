@@ -19,7 +19,7 @@ function NewPattern() {
     const [urls, setUrls] = useState([]);
     const [files, setFiles] = useState([]);
     const [patternId, setPatternId] = useState(0);
-    const [formStep, setFormStep] = useState(0);
+    const [formStep, setFormStep] = useState(2);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
@@ -149,7 +149,7 @@ function NewPattern() {
                                         }} options={["", "Beginner", "Medium", "Gevorderd", "Expert"]}
                                         register={register} errors={errors}/>
 
-                                <Textarea className="text-field-red" textareaId="description" labelName="Beschrijving"
+                                <Textarea className="text-field-red" textareaId="description" rows="9" labelName="Beschrijving"
                                           validationRules={{
                                               required: !isDraft ? {
                                                   value: true,
@@ -270,25 +270,27 @@ function NewPattern() {
                         }
 
 
-                        {formStep === 2 && <div className="form-fields">
-                            <div>
-                                <div className="form-field-left">
+                        {formStep === 2 && <div className="pattern-part3">
+                            <div className="part3-left">
+                                <div className="video-field">
                                     <img src={uploadIcon} alt="upload button"/>
                                     <h3>upload een video</h3>
                                 </div>
-                                <div>
+                                <div className="chapters">
                                     <h2>Hoofdtukken</h2>
-                                    <Input className="text-field-red field-row" inputId="startStep1" name="startStep1"
+                                    <div>
+                                    <Input className="text-field-red time" inputId="startStep1" name="startStep1"
                                            labelName="Stap 1" type="text" placeholder="mm:ss" register={register}
                                            errors={errors}/>
-                                    <Input className="text-field-red field-row" inputId="startStep2" name="startStep2"
+                                    <Input className="text-field-red time" inputId="startStep2" name="startStep2"
                                            labelName="Stap 2" type="text" placeholder="mm:ss" register={register}
                                            errors={errors}/>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="form-field-right">
-                                <div>
+                            <div className="steps">
+                                <div className="step">
                                     <Input className="text-field-red" inputId="titleStep1" name="titleStep1"
                                            labelName="Stap 1"
                                            validationRules={{
@@ -307,7 +309,7 @@ function NewPattern() {
                                            }} type="text" register={register} errors={errors}/>
 
                                     <Textarea className="text-field-red" textareaId="descriptionStep1"
-                                              labelName="Beschrijving"
+                                              labelName="Beschrijving" rows="4"
                                               validationRules={{
                                                   required: !isDraft ? {
                                                       value: true,
@@ -325,7 +327,7 @@ function NewPattern() {
                                 </div>
 
 
-                                <div>
+                                <div className="step">
                                     <Input className="text-field-red" inputId="titleStep2" name="titleStep2"
                                            labelName="Stap 2"
                                            validationRules={{
@@ -344,7 +346,7 @@ function NewPattern() {
                                            }} type="text" register={register} errors={errors}/>
 
                                     <Textarea className="text-field-red" textareaId="descriptionStep2"
-                                              labelName="Beschrijving"
+                                              labelName="Beschrijving" rows="4"
                                               validationRules={{
                                                   required: !isDraft ? {
                                                       value: true,
@@ -360,6 +362,7 @@ function NewPattern() {
                                                   } : false,
                                               }} register={register} errors={errors}/>
                                 </div>
+                                <Button classname="add-icon add-step" type="button" img={addIcon} alt="plus icoon"/>
                             </div>
                         </div>
                         }
