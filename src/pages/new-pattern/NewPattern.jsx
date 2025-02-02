@@ -202,7 +202,24 @@ function NewPattern(){
                                 </div>
                                 <Button classname="add-icon" type="button" img={addIcon} alt="plus icoon"/>
                             </div>
-                            <div><h2>Afmetingen</h2></div>
+                            <div className="form-field-right">
+                                <h2>Afmetingen</h2>
+                                <Input className="text-field-red" inputId="length" name="length" labelName="Lengte in cm" validationRules={{
+                                    required: !isDraft ? {value: true, message: "Lengte is verplicht"} : false,
+                                    min: !isDraft ? {
+                                        value: 1,
+                                        message: "Lengte moet minstens 1cm zijn"
+                                    } : false,
+                                }} type="text" register={register} errors={errors}/>
+                                <Input className="text-field-red" inputId="width" name="width" labelName="Breedte in cm" validationRules={{
+                                    required: !isDraft ? {value: true, message: "Breedte is verplicht"} : false,
+                                    min: !isDraft ? {
+                                        value: 1,
+                                        message: "Breedte moet minstens 1cm zijn"
+                                    } : false,
+                                }} type="text" register={register} errors={errors}/>
+                            </div>
+
                         </div>
                         }
 
