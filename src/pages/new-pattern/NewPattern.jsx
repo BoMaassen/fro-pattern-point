@@ -6,6 +6,9 @@ import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
 import Input from "../../components/input/Input.jsx";
 import uploadIcon from "../../assets/icons/upload icon.svg";
+import progressBar1 from "../../assets/progress bar-1.svg";
+import progressBar2 from "../../assets/progress bar-2.svg";
+import progressBar3 from "../../assets/progress bar-3.svg";
 import Select from "../../components/select/Select.jsx";
 import Textarea from "../../components/textarea/Textarea.jsx";
 
@@ -14,6 +17,7 @@ function NewPattern(){
     const [urls, setUrls] = useState([]);
     const [files, setFiles] = useState([]);
     const [patternId, setPatternId] = useState(0);
+    const [formStep, setFormStep] = useState(2);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
@@ -26,6 +30,14 @@ function NewPattern(){
             return {url: URL.createObjectURL(file), fileName: file.name,}
         })
         setUrls(urlsArray);
+    }
+
+    function formStepPlus(){
+        setFormStep(prevState => prevState + 1 )
+    }
+
+    function formStepMinus(){
+        setFormStep(prevState => prevState - 1 )
     }
 
 
@@ -75,16 +87,19 @@ function NewPattern(){
             }
         }
         void sendImage();
-    }, [postId]);
+    }, [patternId]);
 
 
     return (
         <main>
             <section className="outer-container">
                 <div className="new-post-container">
+                    {formStep === 0 && <img src={progressBar1} alt="progressie bar nieuw patroon"/>}
+                    {formStep === 1 && <img src={progressBar2} alt="progressie bar nieuw patroon"/>}
+                    {formStep === 2 && <img src={progressBar3} alt="progressie bar nieuw patroon"/>}
                     <Button classname="icon-button" type="button" img={closeIcon} alt="Sluit icoon"/>
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
-                        <div className="form-fields">
+                        {formStep=== 0 && <div className="form-fields">
                             <div className="form-field-left">
                                 <Input inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
                                     required: {value: true, message: "Je moet een foto uploaden"},
@@ -141,9 +156,23 @@ function NewPattern(){
                                               } : false,
                                           }} register={register} errors={errors}/>
                             </div>
-                        </div>
+                        </div>}
+
+                        {formStep=== 1 && <div className="form-fields">
+                            <div className="form-field-left">
+                                <h3>form part 2</h3>
+                            </div></div>
+                        }
+
+
+                        {formStep=== 2 && <div className="form-fields">
+                            <div className="form-field-left">
+                                <h3>form part 3</h3>
+                            </div></div>
+                        }
                         <div className="preview-buttons">
-                            {urls.length > 1 ?
+                            {formStep === 0 &&  <div>
+                                {urls.length > 1 ?
                                 urls?.slice(1, 4).map((url) => {
                                     return <span key={url.name} className="placeholder-img"><img
                                         className="preview-img" src={url.url} alt="peview img"></img></span>
@@ -152,11 +181,31 @@ function NewPattern(){
                                     <div className="placeholder-img"></div>
                                     <div className="placeholder-img"></div>
                                 </div>}
+                            </div> }
+                            {formStep === 1 && <div className="buttons">
+                                <Button classname="text-button blue" type="button"
+                                        onClick={formStepMinus} text="Terug"/>
+                            </div>
+                            }
+                            {formStep === 2 && <div className="buttons">
+                                <Button classname="text-button blue" type="button"
+                                        onClick={formStepMinus} text="Terug"/>
+                            </div>
+                            }
+
                             <div className="buttons">
                                 <Button classname="text-button yellow" type="submit" onClick={() => toggleIsDraft(true)}
                                         text="Concept"/>
-                                <Button classname="text-button orange" type="submit"
-                                        onClick={() => toggleIsDraft(false)} text="Uploaden"/>
+
+                                {formStep === 0 &&
+                                    <Button classname="text-button orange" type="Button"
+                                            onClick={formStepPlus} text="Volgende"/>}
+                                {formStep === 1 &&
+                                    <Button classname="text-button orange" type="Button"
+                                            onClick={formStepPlus} text="Volgende"/>}
+
+                                {formStep === 2 &&
+                                <Button classname="text-button orange" type="submit" text="Uploaden"/>}
                             </div>
                         </div>
                     </form>
