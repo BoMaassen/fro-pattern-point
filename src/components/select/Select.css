@@ -4,6 +4,6 @@ select {
     background-image: url('../../assets/icons/arrow down.svg'),
     linear-gradient(var(--tertiary-color), var(--tertiary-color));
     background-repeat: no-repeat;
-    background-position: right 12px center, right 0 center;
-    background-size: 1rem auto, 12% 100%;
+    background-position: right 5% center, right 0 center;
+    background-size: 1rem auto, 14% 100%;
 }

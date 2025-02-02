@@ -12,6 +12,7 @@ import progressBar3 from "../../assets/progress bar-3.svg";
 import Select from "../../components/select/Select.jsx";
 import Textarea from "../../components/textarea/Textarea.jsx";
 import addIcon from "../../assets/icons/Add Circle.svg";
+import "./NewPattern.css";
 
 function NewPattern() {
     const [isDraft, toggleIsDraft] = useState(false);
@@ -42,11 +43,14 @@ function NewPattern() {
     }
 
 
-    async function handleFormSubmit(data) {
-        const token = localStorage.getItem('token');
-        const formData = {...data, isDraft};
+    function handleFormSubmit(data) {
+        /* const token = localStorage.getItem('token');
+         const formData = {...data, isDraft};*/
 
-        try {
+        console.log("daaaata");
+        console.log(data);
+
+        /*try {
             const result = await axios.post("http://localhost:8080/pattern", {
                 title: formData.title,
                 level: formData.level,
@@ -63,7 +67,7 @@ function NewPattern() {
             navigate("/account");
         } catch (e) {
             console.log("er ging wat fout " + e);
-        }
+        }*/
     }
 
     useEffect(() => {
@@ -99,8 +103,8 @@ function NewPattern() {
                     {formStep === 0 && <img src={progressBar1} alt="progressie bar nieuw patroon"/>}
                     {formStep === 1 && <img src={progressBar2} alt="progressie bar nieuw patroon"/>}
                     {formStep === 2 && <img src={progressBar3} alt="progressie bar nieuw patroon"/>}
-                    <Button classname="icon-button" type="button" img={closeIcon} alt="Sluit icoon"/>
-                    <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon"/>
+                    <form className="form-new-pattern" onSubmit={handleSubmit(handleFormSubmit)}>
                         {formStep === 0 && <div className="form-fields">
                             <div className="form-field-left">
                                 <Input inputId="content" name="content" labelName="Upload foto's in png of jpeg"
@@ -163,78 +167,103 @@ function NewPattern() {
                             </div>
                         </div>}
 
-                        {formStep === 1 && <div className="form-fields">
-                            <div className="form-field-right">
+                        {formStep === 1 && <div className="pattern-part2">
+                            <div className="form-accessories">
+
                                 <h2>Benodigdheden</h2>
-                                <Select className="text-field-red" selectId="hookSize" labelName="Maat haaknaald"
-                                        validationRules={{
-                                            required: !isDraft ? {
-                                                value: true,
-                                                message: "Je moet een maat kiezen"
-                                            } : false,
-                                        }} options={["", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0"]}
-                                        register={register} errors={errors}/>
-                                <Input className="text-field-red" inputId="amountOfYarn" name="amountOfYarn"
-                                       labelName="Aantal garen" validationRules={{
-                                    required: !isDraft ? {value: true, message: "Aantal gram is verplicht"} : false,
-                                    minLength: !isDraft ? {
-                                        value: 1,
-                                        message: "Aantal moet minstens 1 gram zijn"
-                                    } : false,
-                                }} type="text" register={register} errors={errors}/>
-                                <Input className="text-field-red" inputId="typeYarn" name="typeYarn"
-                                       labelName="Soort garen" type="text" register={register} errors={errors}/>
-                                <Input inputId="scissor" name="scissor" labelName="Schaar" type="checkbox"
-                                       value="scissor" register={register} errors={errors}/>
-                                <Input inputId="darningNeedle" name="darningNeedle" labelName="Stopnaald"
-                                       type="checkbox" value="darningNeedle" register={register} errors={errors}/>
-                                <Input inputId="measuringTape" name="measuringTape" labelName="Meetlint" type="checkbox"
-                                       value="measuringTape" register={register} errors={errors}/>
+                                <div className="accessories-fields">
+                                    <Select className="text-field-red field-row" selectId="hookSize"
+                                            labelName="Maat haaknaald"
+                                            validationRules={{
+                                                required: !isDraft ? {
+                                                    value: true,
+                                                    message: "Je moet een maat kiezen"
+                                                } : false,
+                                            }}
+                                            options={["", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0"]}
+                                            register={register} errors={errors}/>
+                                    <Input className="text-field-red field-row" inputId="amountOfYarn"
+                                           name="amountOfYarn"
+                                           labelName="Aantal garen" validationRules={{
+                                        required: !isDraft ? {value: true, message: "Aantal gram is verplicht"} : false,
+                                        min: !isDraft ? {
+                                            value: 1,
+                                            message: "Aantal moet minstens 1 gram zijn"
+                                        } : false,
+                                    }} type="number" register={register} errors={errors}/>
+                                    <Input className="text-field-red field-row" inputId="typeYarn" name="typeYarn"
+                                           labelName="Soort garen" type="text" register={register} errors={errors}/>
+                                    <div className="checkbox">
+                                        <Input inputId="scissor" name="scissor" labelName="Schaar" type="checkbox"
+                                               value="scissor" register={register} errors={errors}/>
+                                        <Input inputId="darningNeedle" name="darningNeedle" labelName="Stopnaald"
+                                               type="checkbox" value="darningNeedle" register={register}
+                                               errors={errors}/>
+                                        <Input inputId="measuringTape" name="measuringTape" labelName="Meetlint"
+                                               type="checkbox"
+                                               value="measuringTape" register={register} errors={errors}/>
+                                    </div>
+
+                                </div>
 
                             </div>
-                            <div className="form-field-right">
+                            <div className="form-abbreviations">
                                 <h2>Afkortingen</h2>
-                                <div>
-                                    <Input className="text-field-red" inputId="abbreviated" name="abbreviated"
-                                           labelName="Afkorting 1" type="text" placeholder="Afgekort"
-                                           register={register} errors={errors}/>
-                                    <Input className="text-field-red" inputId="fullForm" name="fullForm" type="text"
-                                           placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                <div className="abbreviations-fields">
+                                    <div className="abbreviations">
+                                        <Input className="text-field-red field-row" inputId="abbreviated1"
+                                               name="abbreviated1"
+                                               labelName="Afkorting 1" type="text" placeholder="Afgekort"
+                                               register={register} errors={errors}/>
+                                        <Input className="text-field-red field-row" inputId="fullForm1" name="fullForm1"
+                                               type="text"
+                                               placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                    </div>
+                                    <div className="abbreviations">
+                                        <Input className="text-field-red field-row" inputId="abbreviated2"
+                                               name="abbreviated2"
+                                               labelName="Afkorting 2" type="text" placeholder="Afgekort"
+                                               register={register} errors={errors}/>
+                                        <Input className="text-field-red field-row" inputId="fullForm2" name="fullForm2"
+                                               type="text"
+                                               placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                    </div>
+                                    <div className="abbreviations">
+                                        <Input className="text-field-red field-row" inputId="abbreviated3"
+                                               name="abbreviated3"
+                                               labelName="Afkorting 3" type="text" placeholder="Afgekort"
+                                               register={register} errors={errors}/>
+                                        <Input className="text-field-red field-row" inputId="fullForm3" name="fullForm3"
+                                               type="text"
+                                               placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                    </div>
+                                    <Button classname="add-icon" type="button" img={addIcon} alt="plus icoon"/>
                                 </div>
-                                <div>
-                                    <Input className="text-field-red" inputId="abbreviated" name="abbreviated"
-                                           labelName="Afkorting 2" type="text" placeholder="Afgekort"
-                                           register={register} errors={errors}/>
-                                    <Input className="text-field-red" inputId="fullForm" name="fullForm" type="text"
-                                           placeholder="Uitgeschreven" register={register} errors={errors}/>
-                                </div>
-                                <div>
-                                    <Input className="text-field-red" inputId="abbreviated" name="abbreviated"
-                                           labelName="Afkorting 3" type="text" placeholder="Afgekort"
-                                           register={register} errors={errors}/>
-                                    <Input className="text-field-red" inputId="fullForm" name="fullForm" type="text"
-                                           placeholder="Uitgeschreven" register={register} errors={errors}/>
-                                </div>
-                                <Button classname="add-icon" type="button" img={addIcon} alt="plus icoon"/>
                             </div>
-                            <div className="form-field-right">
+                            <div className="form-measurments">
                                 <h2>Afmetingen</h2>
-                                <Input className="text-field-red" inputId="length" name="length"
-                                       labelName="Lengte in cm" validationRules={{
-                                    required: !isDraft ? {value: true, message: "Lengte is verplicht"} : false,
-                                    min: !isDraft ? {
-                                        value: 1,
-                                        message: "Lengte moet minstens 1cm zijn"
-                                    } : false,
-                                }} type="number" register={register} errors={errors}/>
-                                <Input className="text-field-red" inputId="width" name="width" labelName="Breedte in cm"
-                                       validationRules={{
-                                           required: !isDraft ? {value: true, message: "Breedte is verplicht"} : false,
-                                           min: !isDraft ? {
-                                               value: 1,
-                                               message: "Breedte moet minstens 1cm zijn"
-                                           } : false,
-                                       }} type="number" register={register} errors={errors}/>
+                                <div className="measurments-fields">
+                                    <Input className="text-field-red field-row" inputId="length" name="length"
+                                           labelName="Lengte in cm" validationRules={{
+                                        required: !isDraft ? {value: true, message: "Lengte is verplicht"} : false,
+                                        min: !isDraft ? {
+                                            value: 1,
+                                            message: "Lengte moet minstens 1cm zijn"
+                                        } : false,
+                                    }} type="number" register={register} errors={errors}/>
+                                    <Input className="text-field-red field-row" inputId="width" name="width"
+                                           labelName="Breedte in cm"
+                                           validationRules={{
+                                               required: !isDraft ? {
+                                                   value: true,
+                                                   message: "Breedte is verplicht"
+                                               } : false,
+                                               min: !isDraft ? {
+                                                   value: 1,
+                                                   message: "Breedte moet minstens 1cm zijn"
+                                               } : false,
+                                           }} type="number" register={register} errors={errors}/>
+                                </div>
                             </div>
 
                         </div>
@@ -243,38 +272,24 @@ function NewPattern() {
 
                         {formStep === 2 && <div className="form-fields">
                             <div>
-                            <div className="form-field-left">
-                                <Input inputId="video" name="video" labelName="Upload video"
-                                       validationRules={{
-                                           required: {value: true, message: "Je moet een video uploaden"},
-                                       }} type="file" accept="image/png, image/jpeg"
-                                       register={register}
-                                       errors={errors} onChange={fileToUrl}>
-                                    {/*6.5 react hook form watch functie*/}
+                                <div className="form-field-left">
                                     <img src={uploadIcon} alt="upload button"/>
-                                </Input>
-
-                                {urls.length > 0 && <span className="form-field-left">
-                                <img className="preview-img" src={urls[0].url} alt="peview img"/>
-                                <Button classname="icon-button delete-img" type="button" img={closeIcon}
-                                        alt="Sluit icoon" onClick={(() => setUrls([]))}/>
-                            </span>
-                                }
-
-
-                            </div>
-                            <div>
-                                <h2>Hoofdtukken</h2>
-                                <Input className="text-field-red" inputId="startStep1" name="startStep1"
-                                       labelName="Stap 1" type="time" register={register} errors={errors}/>
-                                <Input className="text-field-red" inputId="startStep2" name="startStep2"
-                                       labelName="Stap 2" type="time" register={register} errors={errors}/>
-                            </div>
+                                    <h3>upload een video</h3>
+                                </div>
+                                <div>
+                                    <h2>Hoofdtukken</h2>
+                                    <Input className="text-field-red field-row" inputId="startStep1" name="startStep1"
+                                           labelName="Stap 1" type="text" placeholder="mm:ss" register={register}
+                                           errors={errors}/>
+                                    <Input className="text-field-red field-row" inputId="startStep2" name="startStep2"
+                                           labelName="Stap 2" type="text" placeholder="mm:ss" register={register}
+                                           errors={errors}/>
+                                </div>
                             </div>
 
                             <div className="form-field-right">
                                 <div>
-                                    <Input className="text-field-red" inputId="title" name="title"
+                                    <Input className="text-field-red" inputId="titleStep1" name="titleStep1"
                                            labelName="Stap 1"
                                            validationRules={{
                                                required: !isDraft ? {
@@ -291,7 +306,7 @@ function NewPattern() {
                                                } : false,
                                            }} type="text" register={register} errors={errors}/>
 
-                                    <Textarea className="text-field-red" textareaId="description"
+                                    <Textarea className="text-field-red" textareaId="descriptionStep1"
                                               labelName="Beschrijving"
                                               validationRules={{
                                                   required: !isDraft ? {
@@ -311,7 +326,8 @@ function NewPattern() {
 
 
                                 <div>
-                                    <Input className="text-field-red" inputId="title" name="title" labelName="Stap 2"
+                                    <Input className="text-field-red" inputId="titleStep2" name="titleStep2"
+                                           labelName="Stap 2"
                                            validationRules={{
                                                required: !isDraft ? {
                                                    value: true,
@@ -327,7 +343,7 @@ function NewPattern() {
                                                } : false,
                                            }} type="text" register={register} errors={errors}/>
 
-                                    <Textarea className="text-field-red" textareaId="description"
+                                    <Textarea className="text-field-red" textareaId="descriptionStep2"
                                               labelName="Beschrijving"
                                               validationRules={{
                                                   required: !isDraft ? {
@@ -354,7 +370,7 @@ function NewPattern() {
                                         return <span key={url.name} className="placeholder-img"><img
                                             className="preview-img" src={url.url} alt="peview img"></img></span>
                                     }) : <div className="placeholder">
-                                    <div className="placeholder-img"></div>
+                                        <div className="placeholder-img"></div>
                                         <div className="placeholder-img"></div>
                                         <div className="placeholder-img"></div>
                                     </div>}
@@ -371,7 +387,8 @@ function NewPattern() {
                                     <Button classname="text-button orange" type="Button"
                                             onClick={formStepPlus} text="Volgende"/>}
                                 {formStep === 2 &&
-                                    <Button classname="text-button orange" type="submit" text="Uploaden"/>}
+                                    <Button classname="text-button orange" type="submit" text="Uploaden"
+                                            onClick={handleSubmit(handleFormSubmit)}/>}
                             </div>
                         </div>
                     </form>

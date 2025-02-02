@@ -85,8 +85,8 @@ function NewPost() {
         <main>
             <section className="outer-container">
                 <div className="new-post-container">
-                    <Button classname="icon-button" type="button" img={closeIcon} alt="Sluit icoon"/>
-                    <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon"/>
+                    <form className="form-new-post"  onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">
                                 <Input inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
