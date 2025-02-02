@@ -63,10 +63,8 @@ function SignUp(){
                         <fieldset>
                             <legend>Soort gebruiker</legend>
                             <div className="role-field">
-                        <Input className="radio-input" inputId="haker" name="role" labelName="Haker" validationRules={{
-                            required: {value: true, message: "Wachtwoord is verplicht"}}} type="radio" value="HAKER" checked="defaultChecked" register={register} errors={errors}/>
-                        <Input className="radio-input" inputId="patroonmaker" name="role" labelName="Patroonmaker" validationRules={{
-                            required: {value: true, message: "Wachtwoord is verplicht"}}} type="radio" value="PATROONMAKER" register={register} errors={errors}/>
+                        <Input className="radio-input" inputId="haker" name="role" labelName="Haker" type="radio" value="HAKER" checked="defaultChecked" register={register} errors={errors}/>
+                        <Input className="radio-input" inputId="patroonmaker" name="role" labelName="Patroonmaker"  type="radio" value="PATROONMAKER" register={register} errors={errors}/>
                             </div>
                         </fieldset>
                     </div>

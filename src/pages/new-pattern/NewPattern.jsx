@@ -17,7 +17,7 @@ function NewPattern(){
     const [urls, setUrls] = useState([]);
     const [files, setFiles] = useState([]);
     const [patternId, setPatternId] = useState(0);
-    const [formStep, setFormStep] = useState(2);
+    const [formStep, setFormStep] = useState(0);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
@@ -159,9 +159,32 @@ function NewPattern(){
                         </div>}
 
                         {formStep=== 1 && <div className="form-fields">
-                            <div className="form-field-left">
-                                <h3>form part 2</h3>
-                            </div></div>
+                            <div className="form-field-right">
+                                <h2>Benodigdheden</h2>
+                                <Select className="text-field-red" selectId="hookSize" labelName="Maat haaknaald"
+                                        validationRules={{
+                                            required: !isDraft ? {
+                                                value: true,
+                                                message: "Je moet een maat kiezen"
+                                            } : false,
+                                        }} options={["", "2.0", "2.5", "3.0", "3.5", "4.0","4.5", "5.0", "5.5", "6.0" ]}
+                                        register={register} errors={errors}/>
+                                <Input className="text-field-red" inputId="amountOfYarn" name="amountOfYarn" labelName="Aantal garen" validationRules={{
+                                    required: !isDraft ? {value: true, message: "Aantal gram is verplicht"} : false,
+                                    minLength: !isDraft ? {
+                                        value: 1,
+                                        message: "Aantal moet minstens 1 gram zijn"
+                                    } : false,
+                                }} type="text" register={register} errors={errors}/>
+                                <Input className="text-field-red" inputId="typeYarn" name="typeYarn" labelName="Soort garen" type="text" register={register} errors={errors}/>
+                                <Input inputId="scissor" name="scissor" labelName="Schaar" type="checkbox" value="scissor" register={register} errors={errors}/>
+                                <Input inputId="darningNeedle" name="darningNeedle" labelName="Stopnaald" type="checkbox" value="darningNeedle" register={register} errors={errors}/>
+                                <Input inputId="measuringTape" name="measuringTape" labelName="Meetlint" type="checkbox" value="measuringTape" register={register} errors={errors}/>
+
+                            </div>
+                            <div><h2>Afkortingen</h2></div>
+                            <div><h2>Afmetingen</h2></div>
+                           </div>
                         }
 
 
