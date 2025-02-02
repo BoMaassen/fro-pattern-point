@@ -1,6 +1,6 @@
 import './Input.css';
 
-function Input({className, inputId, name, labelName, validationRules, multiple, onChange, type, accept, value, checked, register, errors, children}){
+function Input({className, inputId, name, labelName, validationRules, multiple, onChange, type, accept, value, checked, placeholder, register, errors, children}){
     return(
         <>
 
@@ -17,6 +17,7 @@ function Input({className, inputId, name, labelName, validationRules, multiple, 
                 onChange={onChange}
                 value={value}
                 defaultChecked={checked}
+                placeholder={placeholder}
             />
             {errors[inputId] && <p className="error-message">{errors[inputId].message}</p>}
             </label>

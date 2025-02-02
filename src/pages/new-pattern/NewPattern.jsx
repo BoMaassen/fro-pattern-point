@@ -11,6 +11,7 @@ import progressBar2 from "../../assets/progress bar-2.svg";
 import progressBar3 from "../../assets/progress bar-3.svg";
 import Select from "../../components/select/Select.jsx";
 import Textarea from "../../components/textarea/Textarea.jsx";
+import addIcon from "../../assets/icons/Add Circle.svg";
 
 function NewPattern(){
     const [isDraft, toggleIsDraft] = useState(false);
@@ -182,19 +183,38 @@ function NewPattern(){
                                 <Input inputId="measuringTape" name="measuringTape" labelName="Meetlint" type="checkbox" value="measuringTape" register={register} errors={errors}/>
 
                             </div>
-                            <div><h2>Afkortingen</h2></div>
+                            <div className="form-field-right">
+                                <h2>Afkortingen</h2>
+                                <div>
+                                    <Input className="text-field-red" inputId="abbreviated" name="abbreviated"
+                                           labelName="Afkorting 1" type="text" placeholder="Afgekort" register={register} errors={errors}/>
+                                    <Input className="text-field-red" inputId="fullForm" name="fullForm" type="text" placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                </div>
+                                <div>
+                                    <Input className="text-field-red" inputId="abbreviated" name="abbreviated"
+                                           labelName="Afkorting 2" type="text" placeholder="Afgekort" register={register} errors={errors}/>
+                                    <Input className="text-field-red" inputId="fullForm" name="fullForm" type="text" placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                </div>
+                                <div>
+                                    <Input className="text-field-red" inputId="abbreviated" name="abbreviated"
+                                           labelName="Afkorting 3" type="text" placeholder="Afgekort" register={register} errors={errors}/>
+                                    <Input className="text-field-red" inputId="fullForm" name="fullForm" type="text" placeholder="Uitgeschreven" register={register} errors={errors}/>
+                                </div>
+                                <Button classname="add-icon" type="button" img={addIcon} alt="plus icoon"/>
+                            </div>
                             <div><h2>Afmetingen</h2></div>
-                           </div>
+                        </div>
                         }
 
 
-                        {formStep=== 2 && <div className="form-fields">
+                        {formStep === 2 && <div className="form-fields">
                             <div className="form-field-left">
                                 <h3>form part 3</h3>
-                            </div></div>
+                            </div>
+                        </div>
                         }
                         <div className="preview-buttons">
-                            {formStep === 0 &&  <div>
+                        {formStep === 0 &&  <div>
                                 {urls.length > 1 ?
                                 urls?.slice(1, 4).map((url) => {
                                     return <span key={url.name} className="placeholder-img"><img
@@ -205,28 +225,17 @@ function NewPattern(){
                                     <div className="placeholder-img"></div>
                                 </div>}
                             </div> }
-                            {formStep === 1 && <div className="buttons">
+                            {formStep > 0 && <div className="buttons">
                                 <Button classname="text-button blue" type="button"
                                         onClick={formStepMinus} text="Terug"/>
-                            </div>
-                            }
-                            {formStep === 2 && <div className="buttons">
-                                <Button classname="text-button blue" type="button"
-                                        onClick={formStepMinus} text="Terug"/>
-                            </div>
-                            }
-
+                            </div>}
                             <div className="buttons">
                                 <Button classname="text-button yellow" type="submit" onClick={() => toggleIsDraft(true)}
                                         text="Concept"/>
 
-                                {formStep === 0 &&
+                                {formStep < 2 &&
                                     <Button classname="text-button orange" type="Button"
                                             onClick={formStepPlus} text="Volgende"/>}
-                                {formStep === 1 &&
-                                    <Button classname="text-button orange" type="Button"
-                                            onClick={formStepPlus} text="Volgende"/>}
-
                                 {formStep === 2 &&
                                 <Button classname="text-button orange" type="submit" text="Uploaden"/>}
                             </div>
