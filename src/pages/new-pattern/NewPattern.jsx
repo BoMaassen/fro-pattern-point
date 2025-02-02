@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import {data, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
@@ -19,7 +19,8 @@ function NewPattern() {
     const [urls, setUrls] = useState([]);
     const [files, setFiles] = useState([]);
     const [patternId, setPatternId] = useState(0);
-    const [formStep, setFormStep] = useState(2);
+    const [formStep, setFormStep] = useState(0);
+    const [formData, setFormdata] = useState({});
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
@@ -43,19 +44,25 @@ function NewPattern() {
     }
 
 
-    function handleFormSubmit(data) {
-        /* const token = localStorage.getItem('token');
-         const formData = {...data, isDraft};*/
-
-        console.log("daaaata");
+   async function handleFormSubmit(data) {
+         const token = localStorage.getItem('token');
         console.log(data);
+        setFormdata(data);
 
-        /*try {
-            const result = await axios.post("http://localhost:8080/pattern", {
-                title: formData.title,
-                level: formData.level,
-                description: formData.description,
-                isDraft: formData.isDraft,
+
+        try {
+            const result = await axios.post("http://localhost:8080/patterns", {
+                title: data.title,
+                level: data.level,
+                description: data.description,
+                hookSize: data.hookSize,
+                amountOfYarn: data.amountOfYarn,
+                typeYarn: data.typeYarn,
+                scissor :data.scissor,
+                darningNeedle: data.darningNeedle,
+                measuringTape: data.measuringTape,
+                length: data.length,
+                width: data.width,
             }, {
                 headers: {
                     Authorization: token,
@@ -64,16 +71,17 @@ function NewPattern() {
             });
             console.log(result.data.id);
             setPatternId(result.data.id);
-            navigate("/account");
+            /*navigate("/account");*/
         } catch (e) {
             console.log("er ging wat fout " + e);
-        }*/
+        }
     }
 
     useEffect(() => {
+        if (!patternId || patternId === 0) return;
+        const token = localStorage.getItem('token');
         async function sendImage() {
-            if (!patternId || patternId === 0) return;
-            const token = localStorage.getItem('token');
+
             const formData = new FormData();
             formData.append("file", files[0]);
             console.log(files[0])
@@ -92,7 +100,60 @@ function NewPattern() {
             }
         }
 
+        async function sendSteps() {
+
+            try {
+                const result = await axios.post(`http://localhost:8080/patterns/${patternId}/steps`,
+                    [
+                        {
+                        title: formData.titleStep1,
+                        description: formData.descriptionStep1
+                    }, {
+                        title: formData.titleStep2,
+                        description: formData.descriptionStep2
+                    }
+                    ]
+                    ,
+                    {
+                        headers: {
+                            Authorization: token,
+                            "Content-Type": "application/json"
+                        },
+                    })
+                console.log(result.data);
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        async function sendAbbreviations() {
+
+            try {
+                const result = await axios.post(`http://localhost:8080/patterns/${patternId}/abbreviations`,
+                    [
+                        {
+                            abbreviated: formData.abbreviated1,
+                            fullForm: formData.fullForm1
+                    }, {
+                        abbreviated: formData.abbreviated2,
+                        fullForm: formData.fullForm2
+                    }
+                    ]
+                    ,
+                    {
+                        headers: {
+                            Authorization: token,
+                            "Content-Type": "application/json"
+                        },
+                    })
+                console.log(result.data);
+            } catch (e) {
+                console.error(e)
+            }
+        }
+
         void sendImage();
+        void sendSteps();
+        void sendAbbreviations();
     }, [patternId]);
 
 
@@ -195,13 +256,12 @@ function NewPattern() {
                                            labelName="Soort garen" type="text" register={register} errors={errors}/>
                                     <div className="checkbox">
                                         <Input inputId="scissor" name="scissor" labelName="Schaar" type="checkbox"
-                                               value="scissor" register={register} errors={errors}/>
+                                               register={register} errors={errors}/>
                                         <Input inputId="darningNeedle" name="darningNeedle" labelName="Stopnaald"
-                                               type="checkbox" value="darningNeedle" register={register}
+                                               type="checkbox" register={register}
                                                errors={errors}/>
                                         <Input inputId="measuringTape" name="measuringTape" labelName="Meetlint"
-                                               type="checkbox"
-                                               value="measuringTape" register={register} errors={errors}/>
+                                               type="checkbox" register={register} errors={errors}/>
                                     </div>
 
                                 </div>
