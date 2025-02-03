@@ -13,8 +13,9 @@ import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
 import arrowDownBlue from "../../assets/icons/arrow down-blue.svg"
 import arrowDownWhite from "../../assets/icons/arrow down.svg"
-import heartOutline from "../../assets/icons/Heart-outline.svg"
 import Comment from "../../components/comment/Comment.jsx";
+import imagesLoaded from "imagesloaded";
+import Masonry from "masonry-layout";
 
 function PostDetails() {
     const [postDetail, setPostDetail] = useState({});
@@ -76,25 +77,43 @@ function PostDetails() {
         }
         fetchPatterns();
 
+        async function fetchComments() {
+            const token = localStorage.getItem('token');
+            try {
+                const result = await axios.get(`http://localhost:8080/posts/${id}/comments`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: token,
+                        }
+                    })
+                setComments(result.data);
+            } catch (e) {
+                console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
+            }
+        }
+        fetchComments();
+
     }, []);
 
+    useEffect(() => {
+        let masonryInstance;
+        imagesLoaded(".patterns", () => {
+            masonryInstance = new Masonry(".patterns", {
+                itemSelector: ".post-large",
+                columnWidth: ".post-large",
+                gutter: 15,
+            });
+        });
 
-    async function fetchComments() {
-        const token = localStorage.getItem('token');
-        try {
-            const result = await axios.get(`http://localhost:8080/posts/${id}/comments`,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: token,
-                    }
-                })
-            setComments(result.data);
-        } catch (e) {
-            console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
-        }
-    }
-    fetchComments();
+        return () => {
+            if (masonryInstance) {
+                masonryInstance.destroy();
+            }
+        };
+    }, [patterns]);
+
+
 
     return <main>
         <section className="post-detail-section">
@@ -143,10 +162,12 @@ function PostDetails() {
         </section>
         <section className="patterns-post-section">
             <h1>Patronen voor dit idee</h1>
+            <div className="patterns">
             {patterns.length > 0 && patterns.map((pattern) => (
                 <Post key={pattern.id} title={pattern.title} username={pattern.username} img={pattern.image?.url}
                       alt={pattern.image?.fileName} className="post-large"/>
             ))}
+            </div>
         </section>
     </main>
 }

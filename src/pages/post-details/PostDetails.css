@@ -96,3 +96,12 @@
     transform: rotate(180deg);
     padding: 10px;
 }
+
+
+/*-----interaction-----*/
+
+.patterns-post-section h1 {
+    padding: 20px;
+    text-align: center;
+    font-size: 2em;
+}
