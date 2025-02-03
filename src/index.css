@@ -66,10 +66,8 @@ button, input, input::placeholder, textarea, select{
   border-radius: 20px;
   border: none;
 }
-
-/*-----Label-----*/
-label{
-  font-size: 20px;
+input::placeholder{
+  font-size: 10px;
 }
 
 /*-----Links-----*/

@@ -11,12 +11,12 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 function NewPost() {
-    const {register, handleSubmit, formState: {errors}} = useForm();
-    const navigate = useNavigate();
     const [isDraft, toggleIsDraft] = useState(false);
     const [urls, setUrls] = useState([]);
     const [files, setFiles] = useState([]);
     const [postId, setPostId] = useState(0);
+    const {register, handleSubmit, formState: {errors}} = useForm();
+    const navigate = useNavigate();
 
 
     function fileToUrl(event) {
@@ -48,13 +48,10 @@ function NewPost() {
                 });
                 console.log(result.data.id);
                 setPostId(result.data.id);
+                navigate("/account");
             } catch (e){
                 console.log("er ging wat fout " + e);
             }
-
-            navigate("/account");
-
-
         }
 
     useEffect(() => {
@@ -88,8 +85,8 @@ function NewPost() {
         <main>
             <section className="outer-container">
                 <div className="new-post-container">
-                    <Button classname="icon-button" type="button" img={closeIcon} alt="Sluit icoon"/>
-                    <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon"/>
+                    <form className="form-new-post"  onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">
                                 <Input inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
@@ -131,7 +128,7 @@ function NewPost() {
                                         }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]}
                                         register={register} errors={errors}/>
 
-                                <Textarea className="text-field-red" textareaId="description" labelName="Beschrijving"
+                                <Textarea className="text-field-red" textareaId="description" rows="9" labelName="Beschrijving"
                                           validationRules={{
                                               required: !isDraft ? {
                                                   value: true,

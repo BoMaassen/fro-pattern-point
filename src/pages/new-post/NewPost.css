@@ -38,10 +38,15 @@
 .new-post-container{
     background-color: var(--primary-color-20);
     padding: 37px;
-    align-items: flex-end;
+    align-items: center;
+    position: relative;
 }
 
 /*-----Form-----*/
+
+.form-new-post{
+    margin-top: 40px;
+}
 
 .form-fields{
     background-color: var(--background-color);
@@ -104,5 +109,11 @@
 
 .buttons{
     width: 390px;
+}
+
+.close-form{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 

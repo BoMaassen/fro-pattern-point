@@ -1,0 +1,142 @@
+/*-----Form-----*/
+.form-new-pattern{
+    margin-top: 40px;
+}
+
+
+.pattern-part2, .pattern-part3{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-basis: 832px;
+}
+
+/*-----Form part 2-----*/
+.form-accessories, .form-abbreviations, .form-measurments{
+    width: 250px;
+    height: 467px;
+    padding: 30px 20px;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accessories-fields, .abbreviations-fields, .measurments-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    width: 100%;
+
+}
+
+.field-row{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.form-accessories select{
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.abbreviations-fields{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.abbreviations{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    width: 100%;
+    gap: 5px;
+}
+
+/*-----Form part 3-----*/
+
+.pattern-part3{
+    gap: 20px;
+}
+
+.part3-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.video-field, .chapters{
+    width: 389px;
+    height: 220px;
+    padding: 30px 20px;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chapters{
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chapters div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: 20px;
+
+}
+.chapters label{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 20px;
+}
+
+.steps{
+    display: flex;
+    flex-direction: column;
+    width: 416px;
+    height: 467px;
+    padding: 30px 45px;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    gap: 20px;
+    position: relative;
+}
+
+.step, .steps label {
+    display: flex;
+    flex-direction: column;
+}
+
+.step{
+    gap: 8px;
+}
+
+.add-step{
+    position: absolute;
+    bottom: 10px;
+    left: 179px;
+}
+
+.time{
+    width: 60px;
+}
+

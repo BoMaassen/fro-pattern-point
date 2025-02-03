@@ -2,7 +2,7 @@ import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 import {useNavigate} from "react-router-dom";
-import isTokenValid from "../../helpers/isTokenValid.js";
+import isTokenValid from "../helpers/isTokenValid.js";
 
 export const AuthContext = createContext({});
 
@@ -61,13 +61,14 @@ function AuthContextProvider({children}){
                 },
                 status: 'done',
             });
+            console.log("Gebruiker is ingelogd!");
+            /*navigate("/account");*/
 
         }catch (e){
             console.error(e + " Er is wat fout gegaan.")
 
         }
-        console.log("Gebruiker is ingelogd!");
-        navigate("/account");
+
 
     }
 

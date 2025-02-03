@@ -9,8 +9,9 @@ import Account from "./pages/account/Account.jsx";
 import Button from "./components/button/Button.jsx";
 import Login from "./pages/login/Login.jsx";
 import SignUp from "./pages/sign-up/SignUp.jsx";
-import {AuthContext} from "./assets/context/AuthContect.jsx";
+import {AuthContext} from "./context/AuthContect.jsx";
 import {useContext} from "react";
+import NewPattern from "./pages/new-pattern/NewPattern.jsx";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/account" element={isAuth ? <Account/> : <Navigate to="/sign-up"/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/sign-up" element={<SignUp/>}></Route>
+                <Route path="/new-pattern" element={isAuth ? <NewPattern/> : <Navigate to="/sign-up"/> }></Route>
             </Routes>
         </>
     )
