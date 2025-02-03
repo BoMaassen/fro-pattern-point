@@ -77,7 +77,7 @@ function Home() {
             </section>
             <section className="feed-container">{posts.map((post) => {
                     return <div key={post.id}>
-                        {post.image && <Link to={`/posts/${post.id}`}><Post className="post-small" title={post.title} img={post.image.url}
+                        {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title} img={post.image.url}
                             alt={post.image.title} profilePiture={user.userIcon} username={user.username}
                                              key={post.id}/></Link> }
                     </div>})}
