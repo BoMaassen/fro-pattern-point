@@ -43,10 +43,9 @@ function Home() {
                             Authorization: token,
                         }})
                 setPosts(result.data);
-                console.log(result.data);
             }
             catch (e){
-                console.log("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
+                console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
             }
         }
         fetchPosts();
@@ -79,7 +78,7 @@ function Home() {
             <section className="feed-container">{posts.map((post) => {
                     return <div key={post.id}>
                         {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title} img={post.image.url}
-                            alt={post.image.title} profilePiture={user.userIcon} username={user.username}
+                            alt={post.image.title} profilePiture={user.userIcon} username={post.username}
                                              key={post.id}/></Link> }
                     </div>})}
             </section>

@@ -21,8 +21,6 @@ function Account(){
                     }})
 
                 setPosts(response.data);
-                console.log(response.data);
-
             }
             catch (e){
                 console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)

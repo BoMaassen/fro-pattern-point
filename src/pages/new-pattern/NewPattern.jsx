@@ -48,7 +48,6 @@ function NewPattern() {
 
    async function handleFormSubmit(data) {
          const token = localStorage.getItem('token');
-        console.log(data);
         setFormdata(data);
 
        if (!postId) {
@@ -75,11 +74,10 @@ function NewPattern() {
                     "Content-Type": "application/json"
                 }
             });
-            console.log(result.data.id);
             setPatternId(result.data.id);
             navigate(`/posts/${postId}`);
         } catch (e) {
-            console.log("er ging wat fout " + e);
+            console.error("er ging wat fout " + e);
         }
     }
 
@@ -90,7 +88,6 @@ function NewPattern() {
 
             const formData = new FormData();
             formData.append("file", files[0]);
-            console.log(files[0])
 
             try {
                 const result = await axios.post(`http://localhost:8080/patterns/${patternId}/image`, formData,

@@ -25,7 +25,7 @@ function Login(){
             login(result.headers.authorization);
 
         } catch (e){
-            console.log("er ging wat fout " + e);
+            console.error("er ging wat fout " + e);
         }
     }
 

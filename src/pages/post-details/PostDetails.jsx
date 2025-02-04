@@ -36,7 +36,6 @@ function PostDetails() {
                     "Content-Type": "application/json"
                 }
             });
-            console.log(result.data);
             setComments([...comments, result.data]);
         } catch (e) {
             console.error("er ging wat fout " + e);
@@ -93,7 +92,6 @@ function PostDetails() {
                         }
                     })
                 setPatterns(result.data);
-                console.log(result.data);
             } catch (e) {
                 console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
             }

@@ -46,11 +46,10 @@ function NewPost() {
                         "Content-Type": "application/json"
                     }
                 });
-                console.log(result.data.id);
                 setPostId(result.data.id);
                 navigate("/account");
             } catch (e){
-                console.log("er ging wat fout " + e);
+                console.error("er ging wat fout " + e);
             }
         }
 
@@ -60,7 +59,6 @@ function NewPost() {
             const token = localStorage.getItem('token');
             const formData = new FormData();
             formData.append("file", files[0]);
-            console.log(files[0])
 
             try {
                 const result = await axios.post(`http://localhost:8080/posts/${postId}/image`, formData,
