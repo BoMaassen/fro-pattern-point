@@ -17,9 +17,9 @@
 .comment-details{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     font-size: 0.6em;
+    gap: 5px;
 }
 
 .sub-comments{
