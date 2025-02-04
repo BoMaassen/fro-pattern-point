@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import {data, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
@@ -23,6 +23,8 @@ function NewPattern() {
     const [formData, setFormdata] = useState({});
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
+    const location = useLocation();
+    const postId = location.state?.id;
 
 
     function fileToUrl(event) {
@@ -49,8 +51,13 @@ function NewPattern() {
         console.log(data);
         setFormdata(data);
 
+       if (!postId) {
+           console.error("Post ID is not available.");
+           return;
+       }
+
         try {
-            const result = await axios.post("http://localhost:8080/patterns", {
+            const result = await axios.post(`http://localhost:8080/posts/${postId}/patterns`, {
                 title: data.title,
                 level: data.level,
                 description: data.description,
@@ -70,7 +77,7 @@ function NewPattern() {
             });
             console.log(result.data.id);
             setPatternId(result.data.id);
-            /*navigate("/account");*/
+            navigate(`/posts/${postId}`);
         } catch (e) {
             console.log("er ging wat fout " + e);
         }

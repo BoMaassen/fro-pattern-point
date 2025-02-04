@@ -36,7 +36,8 @@ function PostDetails() {
                     "Content-Type": "application/json"
                 }
             });
-            console.log(result.data.id);
+            console.log(result.data);
+            setComments([...comments, result.data]);
         } catch (e) {
             console.error("er ging wat fout " + e);
         }
@@ -60,23 +61,6 @@ function PostDetails() {
         }
         fetchPost();
 
-        async function fetchPatterns() {
-            try {
-                const result = await axios.get("http://localhost:8080/patterns",
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: token,
-                        }
-                    })
-                setPatterns(result.data);
-                console.log(result.data);
-            } catch (e) {
-                console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
-            }
-        }
-        fetchPatterns();
-
         async function fetchComments() {
             const token = localStorage.getItem('token');
             try {
@@ -92,9 +76,33 @@ function PostDetails() {
                 console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
             }
         }
+
         fetchComments();
 
     }, []);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        async function fetchPatterns() {
+            try {
+                const result = await axios.get(`http://localhost:8080/posts/${id}/patterns`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: token,
+                        }
+                    })
+                setPatterns(result.data);
+                console.log(result.data);
+            } catch (e) {
+                console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
+            }
+        }
+        fetchPatterns();
+    }, [postDetail]);
+
+
+
 
     useEffect(() => {
         let masonryInstance;
@@ -112,8 +120,6 @@ function PostDetails() {
             }
         };
     }, [patterns]);
-
-
 
     return <main>
         <section className="post-detail-section">
@@ -151,7 +157,7 @@ function PostDetails() {
                             <Button classname="interact-button like-button-big red" type="button"
                                     text={postDetail.likes} img={heart}
                                     alt="hartjes icoon"/>
-                            <Button classname="interact-button" type="button" img={addIcon} onClick={(() => navigate("/new-pattern"))} alt="plus icoon"/>
+                            <Button classname="interact-button" type="button" img={addIcon} onClick={() => navigate("/new-pattern", { state: { id: id } })} alt="plus icoon"/>
 
                         </div>
 

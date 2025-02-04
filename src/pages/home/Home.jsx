@@ -43,6 +43,7 @@ function Home() {
                             Authorization: token,
                         }})
                 setPosts(result.data);
+                console.log(result.data);
             }
             catch (e){
                 console.log("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
