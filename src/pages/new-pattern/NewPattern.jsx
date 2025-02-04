@@ -49,7 +49,6 @@ function NewPattern() {
         console.log(data);
         setFormdata(data);
 
-
         try {
             const result = await axios.post("http://localhost:8080/patterns", {
                 title: data.title,
@@ -164,7 +163,7 @@ function NewPattern() {
                     {formStep === 0 && <img src={progressBar1} alt="progressie bar nieuw patroon"/>}
                     {formStep === 1 && <img src={progressBar2} alt="progressie bar nieuw patroon"/>}
                     {formStep === 2 && <img src={progressBar3} alt="progressie bar nieuw patroon"/>}
-                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon"/>
+                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon" onClick={(() => navigate("/"))}/>
                     <form className="form-new-pattern" onSubmit={handleSubmit(handleFormSubmit)}>
                         {formStep === 0 && <div className="form-fields">
                             <div className="form-field-left">

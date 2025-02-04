@@ -8,6 +8,7 @@ import imagesLoaded from "imagesloaded";
 import Post from "../../components/post/Post.jsx";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContect.jsx";
+import {Link} from "react-router-dom";
 
 function Home() {
    const [posts, setPosts] = useState([]);
@@ -76,9 +77,9 @@ function Home() {
             </section>
             <section className="feed-container">{posts.map((post) => {
                     return <div key={post.id}>
-                        {post.image && <Post className="post-small" title={post.title} img={post.image.url}
-                                             alt={post.image.title} profilePiture={user.userIcon} username={user.username}
-                                             key={post.id}/>}
+                        {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title} img={post.image.url}
+                            alt={post.image.title} profilePiture={user.userIcon} username={user.username}
+                                             key={post.id}/></Link> }
                     </div>})}
             </section>
         </main>

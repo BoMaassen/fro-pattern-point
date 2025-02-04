@@ -85,7 +85,7 @@ function NewPost() {
         <main>
             <section className="outer-container">
                 <div className="new-post-container">
-                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon"/>
+                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon" onClick={(() => navigate("/"))}/>
                     <form className="form-new-post"  onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">

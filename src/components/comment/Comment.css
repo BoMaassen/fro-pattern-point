@@ -1,0 +1,32 @@
+.comment{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.message{
+    font-size: 0.8em;
+}
+
+.comment-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.6em;
+}
+
+.sub-comments{
+    font-size: 0.6em;
+}
+
+.like-button{
+    background: none;
+    border: none;
+}

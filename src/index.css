@@ -10,6 +10,7 @@
 :root{
   --primary-color: #D74E09;
   --primary-color-20: #D74E0933;
+  --primary-color-10: #D74E0919;
   --secondary-color: #F2BB05;
   --secondary-color-30: #F2BB054d;
   --tertiary-color: #6E0E0A;
@@ -43,7 +44,7 @@ body{
 
 
 /*-----TYPOGRAFIE-----*/
-h1, h2, h3, h4, label, a, legend {
+h1, h2, h3, h4, h5, label, a, legend {
   font-family: "Coiny", serif;
   color: var(--text-color);
 }
@@ -68,6 +69,9 @@ button, input, input::placeholder, textarea, select{
 }
 input::placeholder{
   font-size: 10px;
+}
+textarea{
+  padding: 7px;
 }
 
 /*-----Links-----*/
