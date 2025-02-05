@@ -13,8 +13,8 @@ function Account(){
 
     useEffect(() => {
         let masonryInstance;
-        imagesLoaded('.overview', () => {
-            masonryInstance = new Masonry('.overview', {
+        imagesLoaded(".overview", () => {
+            masonryInstance = new Masonry(".overview", {
                 itemSelector: ".post-small",
                 columnWidth: ".post-small",
                 gutter: 15,

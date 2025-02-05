@@ -1,7 +1,7 @@
 import "./Login.css";
 import Button from "../../components/button/Button.jsx";
 import profilePicture from "../../assets/icons/User Circle blue.svg";
-import Input from "../../components/input/Input.jsx";
+import InputText from "../../components/input-text/InputText.jsx";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -36,12 +36,12 @@ function Login(){
                     <div className="upper-part">
                     <img src={profilePicture} alt="Profiel foto"/>
                     <div className="fields">
-                        <Input className="text-field-red form-field" inputId="username" name="username" labelName="Gebruikersnaam"
-                               validationRules={{
+                        <InputText className="text-field-red form-field" inputId="username" name="username" labelName="Gebruikersnaam"
+                                   validationRules={{
                                    required: {value: true, message: "Gebruikersnaam is verplicht"}
                                }} type="text" register={register} errors={errors}/>
 
-                        <Input className="text-field-red form-field" inputId="password" name="password" labelName="Wachtwoord" validationRules={{
+                        <InputText className="text-field-red form-field" inputId="password" name="password" labelName="Wachtwoord" validationRules={{
                             required: {value: true, message: "Wachtwoord is verplicht"}
                         }} type="password" register={register} errors={errors}/>
 

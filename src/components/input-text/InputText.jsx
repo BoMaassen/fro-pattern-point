@@ -1,6 +1,6 @@
-import './Input.css';
+import './InputText.css';
 
-function Input({className, inputId, name, labelName, validationRules, multiple, onChange, type, accept, value, checked, placeholder, register, errors, children}){
+function InputText({className, inputId, name, labelName, validationRules, type, checked, placeholder, register, errors, children}){
     return(
         <>
 
@@ -12,10 +12,6 @@ function Input({className, inputId, name, labelName, validationRules, multiple, 
                 id={inputId}
                 {...register(name, validationRules)}
                 type={type}
-                accept={accept}
-                multiple={multiple}
-                onChange={onChange}
-                value={value}
                 defaultChecked={checked}
                 placeholder={placeholder}
             />
@@ -24,4 +20,4 @@ function Input({className, inputId, name, labelName, validationRules, multiple, 
         </>
     )
 }
-export default Input;
+export default InputText;

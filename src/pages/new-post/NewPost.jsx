@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useContext, useEffect, useState} from "react";
-import Input from "../../components/input/Input.jsx";
+import InputText from "../../components/input-text/InputText.jsx";
 import Select from "../../components/select/Select.jsx";
 import Textarea from "../../components/textarea/Textarea.jsx";
 import Button from "../../components/button/Button.jsx";
@@ -10,6 +10,7 @@ import uploadIcon from "../../assets/icons/upload icon.svg"
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {PostsContext} from "../../context/PostsContext.jsx";
+import InputFile from "../../components/input-file/InputFile.jsx";
 
 function NewPost() {
     const [isDraft, toggleIsDraft] = useState(false);
@@ -84,13 +85,12 @@ function NewPost() {
                     <form className="form-new-post"  onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">
-                                <Input inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
+                                <InputFile inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
                                     required: {value: true, message: "Je moet een foto uploaden"},
                                 }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
-                                       errors={errors} onChange={fileToUrl}>
-                                     {/*6.5 react hook form watch functie*/}
+                                           errors={errors} onChange={fileToUrl}>
                                     <img src={uploadIcon} alt="upload button"/>
-                                </Input>
+                                </InputFile>
 
                                 {urls.length > 0 && <span className="form-field-left">
                                 <img className="preview-img" src={urls[0].url} alt="peview img"/>
@@ -102,7 +102,7 @@ function NewPost() {
                             </div>
 
                             <div className="form-field-right">
-                                <Input className="text-field-red" inputId="title" name="title" labelName="Titel" validationRules={{
+                                <InputText className="text-field-red" inputId="title" name="title" labelName="Titel" validationRules={{
                                     required: !isDraft ? {value: true, message: "Titel is verplicht"} : false,
                                     minLength: !isDraft ? {
                                         value: 5,

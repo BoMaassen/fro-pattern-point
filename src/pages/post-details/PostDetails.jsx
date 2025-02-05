@@ -7,7 +7,7 @@ import userIconPlus from "../../assets/icons/user icon plus.svg"
 import userIcon from "../../assets/icons/User Circle Single.svg"
 import heart from "../../assets/icons/Heart.svg"
 import addIcon from "../../assets/icons/Add Circle.svg"
-import Input from "../../components/input/Input.jsx";
+import InputText from "../../components/input-text/InputText.jsx";
 import {useForm} from "react-hook-form";
 import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
@@ -156,8 +156,8 @@ function PostDetails() {
                     </div>
                         <div className="interaction-part">
                             <form className="comment-form" onSubmit={handleSubmit(handleFormSubmit)}>
-                                <Input className="text-field-red" inputId="comment" name="comment" type="text"
-                                       placeholder="Reageren..." register={register} errors={errors}/>
+                                <InputText className="text-field-red" inputId="comment" name="comment" type="text"
+                                           placeholder="Reageren..." register={register} errors={errors}/>
                                 <Button classname="comment-button blue interact-button" type="submit"
                                         img={arrowDownWhite} alt="pijl icoon" />
                             </form>

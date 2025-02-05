@@ -60,7 +60,7 @@ function AuthContextProvider({children}){
                 status: 'done',
             });
             console.log("Gebruiker is ingelogd!");
-            /*navigate("/account");*/
+            navigate("/");
 
         }catch (e){
             console.error(e + " Er is wat fout gegaan.")
