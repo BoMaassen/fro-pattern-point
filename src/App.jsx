@@ -13,6 +13,7 @@ import {AuthContext} from "./context/AuthContect.jsx";
 import {useContext} from "react";
 import NewPattern from "./pages/new-pattern/NewPattern.jsx";
 import PostDetails from "./pages/post-details/PostDetails.jsx";
+import NotFound from "./pages/not-found/NotFound.jsx";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/sign-up" element={<SignUp/>}></Route>
                 <Route path="/new-pattern" element={isAuth ? <NewPattern/> : <Navigate to="/sign-up"/> }></Route>
                 <Route path="/posts/:id" element={isAuth ? <PostDetails/> : <Navigate to="/sign-up"/> }></Route>
+                <Route path="*" element={<NotFound/>}/>
 
             </Routes>
         </>
