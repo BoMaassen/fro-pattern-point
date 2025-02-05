@@ -10,7 +10,7 @@ import {AuthContext} from "../../context/AuthContect.jsx";
 
 function Login(){
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const {login} = useContext(AuthContext);
+    const {login, error} = useContext(AuthContext);
     const navigate = useNavigate();
 
     async function handleLoginSubmit(data) {
@@ -21,7 +21,6 @@ function Login(){
                     password: data.password,
 
                 });
-            console.log("het resultaat ", result.headers.authorization);
             login(result.headers.authorization);
 
         } catch (e){
@@ -48,6 +47,7 @@ function Login(){
                     </div>
                     <Link className="reset-password" to={"/sign-up"}>Wachtwoord vergeten?</Link>
                     </div>
+                    {error && <p className="error-message">{errors}</p>}
 
                     <div className="buttons">
 

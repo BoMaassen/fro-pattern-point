@@ -48,7 +48,7 @@ function NewPattern() {
 
 
    async function handleFormSubmit(data) {
-         const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         setFormdata(data);
 
        if (!postId) {
@@ -450,8 +450,7 @@ function NewPattern() {
                                     <Button classname="text-button orange" type="Button"
                                             onClick={formStepPlus} text="Volgende"/>}
                                 {formStep === 2 &&
-                                    <Button classname="text-button orange" type="submit" text="Uploaden"
-                                            onClick={handleSubmit(handleFormSubmit)}/>}
+                                    <Button classname="text-button orange" type="submit" text="Uploaden"/>}
                             </div>
                         </div>
                     </form>

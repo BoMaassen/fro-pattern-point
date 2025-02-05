@@ -8,6 +8,7 @@ export const AuthContext = createContext({});
 
 function AuthContextProvider({children}){
     const navigate = useNavigate();
+    const [error, setError] = useState("");
     const [auth, setAuth] = useState({
         isAuth: false,
         user: null,
@@ -17,8 +18,9 @@ function AuthContextProvider({children}){
     const contextData ={
         isAuth: auth.isAuth,
         user: auth.user,
-        login: login,
-        logOut: logOut,
+        login,
+        logOut,
+        error,
     }
 
     useEffect(() => {
@@ -34,7 +36,6 @@ function AuthContextProvider({children}){
                 user: null,
                 status: 'done',
             });
-
         }
     }, []);
 
@@ -42,6 +43,7 @@ function AuthContextProvider({children}){
         localStorage.setItem('token', token);
         const decodedToken = jwtDecode(token);
         const controller = new AbortController();
+        setError("");
         try {
             const result = await axios.get(`http://localhost:8080/users/${decodedToken.sub}`,{
                 signal: controller.signal,
@@ -56,6 +58,7 @@ function AuthContextProvider({children}){
                     username: result.data.username,
                     email: result.data.email,
                     id: result.data.id,
+                    biography: result.data.biography,
                 },
                 status: 'done',
             });
@@ -63,7 +66,7 @@ function AuthContextProvider({children}){
             navigate("/");
 
         }catch (e){
-            console.error(e + " Er is wat fout gegaan.")
+            setError(e + " Er is wat fout gegaan met inloggen.")
         }
         return function cleanup(){
             controller.abort();

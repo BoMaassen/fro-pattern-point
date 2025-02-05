@@ -12,7 +12,7 @@ import {PostsContext} from "../../context/PostsContext.jsx";
 
 function Home() {
     const {user} = useContext(AuthContext);
-    const {posts} = useContext(PostsContext);
+    const {posts, error} = useContext(PostsContext);
 
     useEffect(() => {
         let masonryInstance;
@@ -54,13 +54,14 @@ function Home() {
                                                                                alt="pijl naar beneden icoon"/></button>
                 </div>
             </section>
-            <section className="feed-container">{posts.map((post) => {
+            {error ? <h1 className="error-message">{error}</h1> :
+                <section className="feed-container">{posts.map((post) => {
                     return <div key={post.id}>
                         {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title} img={post.image.url}
                             alt={post.image.title} profilePiture={user.userIcon} username={post.username}
                                              key={post.id}/></Link> }
                     </div>})}
-            </section>
+            </section> }
         </main>
 
     )

@@ -5,11 +5,20 @@
 }
 
 .user-card, .notifications{
-    border: 3px solid red;
-    padding: 30px 0;
-    width: 338px;
+    border-radius: 20px;
+    padding: 30px;
+    flex-basis: 338px;
+    height: 208px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.aside{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 .post-overview{
     display: flex;

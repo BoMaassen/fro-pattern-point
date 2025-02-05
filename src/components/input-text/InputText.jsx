@@ -1,6 +1,6 @@
 import './InputText.css';
 
-function InputText({className, inputId, name, labelName, validationRules, type, checked, placeholder, register, errors, children}){
+function InputText({className, inputId, name, labelName, validationRules, type, checked, value, placeholder, register, errors, children}){
     return(
         <>
 
@@ -14,6 +14,7 @@ function InputText({className, inputId, name, labelName, validationRules, type, 
                 type={type}
                 defaultChecked={checked}
                 placeholder={placeholder}
+                value={value}
             />
             {errors[inputId] && <p className="error-message">{errors[inputId].message}</p>}
             </label>

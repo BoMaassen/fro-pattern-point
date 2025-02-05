@@ -1,18 +1,22 @@
 import './SignUp.css';
 import profilePicture from "../../assets/icons/User Circle blue.svg";
 import InputText from "../../components/input-text/InputText.jsx";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import Textarea from "../../components/textarea/Textarea.jsx";
+import {useState} from "react";
 
 
 function SignUp(){
+    const [error, setError] = useState("");
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
+
     async function handleSignUpSubmit(data) {
+        setError("");
         try {
             await axios.post(
                 "http://localhost:8080/users",
@@ -30,9 +34,9 @@ function SignUp(){
                 }
             );
             console.log("Succesvol geregistreerd");
-            navigate("/login")
+            navigate("/login");
         } catch (e) {
-            console.error(e + " Er ging wat fout met het ophalen")
+            setError(e + " Er ging wat fout met het ophalen");
         }
     }
 
@@ -69,6 +73,8 @@ function SignUp(){
                         </fieldset>
                     </div>
                 </div>
+
+                {error && <p className="error-message">{error}</p>}
 
                 <div className="buttons">
 

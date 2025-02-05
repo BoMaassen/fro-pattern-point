@@ -6,10 +6,11 @@ import Masonry from "masonry-layout";
 import {AuthContext} from "../../context/AuthContect.jsx";
 import {PostsContext} from "../../context/PostsContext.jsx";
 import {Link} from "react-router-dom";
+import Button from "../../components/button/Button.jsx";
 
-function Account(){
-    const {user} = useContext(AuthContext);
-    const {posts} = useContext(PostsContext);
+function Account() {
+    const {user, isAuth, logOut} = useContext(AuthContext);
+    const {posts, error} = useContext(PostsContext);
 
     useEffect(() => {
         let masonryInstance;
@@ -29,33 +30,45 @@ function Account(){
     }, [posts]);
 
 
-    return ( <main>
-<h1>Account</h1>
+    return (<main>
+            <h1>Account</h1>
             <section className="account-container">
-                <div className="post-overview" >
+                <div className="post-overview">
                     <div className="maps"><h2>placeholder voor buttons</h2></div>
-                    <div className="overview"> {posts.map((post) => {
-                        return <div key={post.id}>
-                            {post.image && <Link to={`/posts/${post.id}`}><Post className="post-small" title={post.title} img={post.image.url}
-                                                 alt={post.image.title} profilePiture={user.userIcon} username={post.username}
-                                                 key={post.id}/></Link>}
-                        </div>
-                    })}
-                    </div>
-            </div>
-
-        <div>
-            <div className="user-card"><h2>{user.username} {user.biography} </h2></div>
-            {/*user card*/}
-            <div className="notifications"><h2>placeholder voor meldingen</h2></div> {/*meldingen*/}
+                    {error ? <h1 className="error-message">{error}</h1> :
+                        <div className="overview"> {posts.map((post) => {
+                            return <div key={post.id}>
+                                {post.image &&
+                                    <Link to={`/posts/${post.id}`}><Post className="post-small" title={post.title}
+                                                                         img={post.image.url}
+                                                                         alt={post.image.title}
+                                                                         profilePiture={user.userIcon}
+                                                                         username={post.username}
+                                                                         key={post.id}/></Link>}
+                            </div>
+                        })}
+                        </div>}
                 </div>
 
-            </section>
+                <aside className="aside">
+                    <div className="user-card">
+                        <h2>@{user.username}</h2>
+                        <p>{user.biography} </p>
 
+                        {isAuth && <Button classname="text-button blue" type="button" onClick={logOut} text="Log uit"/>}
+                    </div>
+
+                    <div className="notifications">
+                        <h2>placeholder voor meldingen</h2>
+                    </div>
+                </aside>
+
+            </section>
 
 
         </main>
 
     )
 }
+
 export default Account;

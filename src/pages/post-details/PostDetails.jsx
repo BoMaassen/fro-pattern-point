@@ -7,7 +7,6 @@ import userIconPlus from "../../assets/icons/user icon plus.svg"
 import userIcon from "../../assets/icons/User Circle Single.svg"
 import heart from "../../assets/icons/Heart.svg"
 import addIcon from "../../assets/icons/Add Circle.svg"
-import InputText from "../../components/input-text/InputText.jsx";
 import {useForm} from "react-hook-form";
 import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
@@ -16,6 +15,7 @@ import arrowDownWhite from "../../assets/icons/arrow down.svg"
 import Comment from "../../components/comment/Comment.jsx";
 import imagesLoaded from "imagesloaded";
 import Masonry from "masonry-layout";
+import InputFile from "../../components/input-file/InputFile.jsx";
 
 function PostDetails() {
     const [postDetail, setPostDetail] = useState({});
@@ -44,12 +44,10 @@ function PostDetails() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const controller = new AbortController();
         async function fetchPost() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}`,
                     {
-                        signal: controller.signal,
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: token,
@@ -67,7 +65,6 @@ function PostDetails() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}/comments`,
                     {
-                        signal: controller.signal,
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: token,
@@ -81,20 +78,14 @@ function PostDetails() {
 
         fetchComments();
 
-        return function cleanup(){
-            controller.abort();
-        }
-
     }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const controller = new AbortController();
         async function fetchPatterns() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}/patterns`,
                     {
-                        signal: controller.signal,
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: token,
@@ -106,11 +97,10 @@ function PostDetails() {
             }
         }
         fetchPatterns();
-        return function cleanup(){
-            controller.abort();
-        }
-
     }, [postDetail]);
+
+
+
 
     useEffect(() => {
         let masonryInstance;
@@ -156,8 +146,8 @@ function PostDetails() {
                     </div>
                         <div className="interaction-part">
                             <form className="comment-form" onSubmit={handleSubmit(handleFormSubmit)}>
-                                <InputText className="text-field-red" inputId="comment" name="comment" type="text"
-                                           placeholder="Reageren..." register={register} errors={errors}/>
+                                <InputFile className="text-field-red" inputId="comment" name="comment" type="text"
+                                       placeholder="Reageren..." register={register} errors={errors}/>
                                 <Button classname="comment-button blue interact-button" type="submit"
                                         img={arrowDownWhite} alt="pijl icoon" />
                             </form>
@@ -177,10 +167,10 @@ function PostDetails() {
         <section className="patterns-post-section">
             <h1>Patronen voor dit idee</h1>
             <div className="patterns">
-            {patterns.length > 0 && patterns.map((pattern) => (
-                <Post key={pattern.id} title={pattern.title} username={pattern.username} img={pattern.image?.url}
-                      alt={pattern.image?.fileName} className="post-large"/>
-            ))}
+                {patterns.length > 0 && patterns.map((pattern) => (
+                    <Post key={pattern.id} title={pattern.title} username={pattern.username} img={pattern.image?.url}
+                          alt={pattern.image?.fileName} className="post-large"/>
+                ))}
             </div>
         </section>
     </main>
