@@ -1,11 +1,11 @@
 /*-----Post-----*/
-.post-detail-section{
+.post-detail-section {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.post-big{
+.post-big {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -13,20 +13,21 @@
     height: 434px;
 }
 
-.details-comments{
+.details-comments {
     display: flex;
     flex-direction: column;
     width: 337px;
 }
 
-.close-post{
+.close-post {
     position: absolute;
     top: 10px;
     left: 10px;
 }
+
 /*-----post img-----*/
 
-.post-img{
+.post-img {
     display: flex;
     max-width: 571px;
     position: relative;
@@ -34,19 +35,19 @@
 
 .post-img img {
     width: 100%;
-    border-radius: 20px 0 0 20px ;
+    border-radius: 20px 0 0 20px;
 }
 
 /*-----post details-----*/
 
-.post-details{
+.post-details {
     background-color: var(--primary-color-20);
     padding: 20px;
     border-radius: 0 20px 0 0;
     flex-basis: 216px;
 }
 
-.user-stats{
+.user-stats {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -54,33 +55,31 @@
 
 /*-----Comments-----*/
 
-.comment-section{
+.comment-section {
     background-color: var(--primary-color-10);
     padding: 15px;
-    border-radius:0 0 20px 0;
+    border-radius: 0 0 20px 0;
     flex-basis: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-
 /*-----interaction-----*/
-
-.comment-form{
+.comment-form {
     display: flex;
     flex-direction: row;
     gap: 3px;
 }
 
-.interaction-part{
+.interaction-part {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 5px;
 }
 
-.interact-button{
+.interact-button {
     border: none;
     border-radius: 20px;
     height: 38px;
@@ -88,18 +87,16 @@
     align-items: center;
 }
 
-.like-button-big{
+.like-button-big {
     padding: 10px;
 }
 
-.comment-button{
+.comment-button {
     transform: rotate(180deg);
     padding: 10px;
 }
 
-
 /*-----interaction-----*/
-
 .patterns-post-section h1 {
     padding: 20px;
     text-align: center;

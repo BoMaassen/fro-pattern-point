@@ -25,25 +25,9 @@ function PostDetails() {
     const {id} = useParams();
     const {register, handleSubmit, formState: {errors}} = useForm();
 
-    async function handleFormSubmit(data) {
-        const token = localStorage.getItem('token');
-        try {
-            const result = await axios.post(`http://localhost:8080/posts/${id}/comments`, {
-                message: data.comment
-            }, {
-                headers: {
-                    Authorization: token,
-                    "Content-Type": "application/json"
-                }
-            });
-            setComments([...comments, result.data]);
-        } catch (e) {
-            console.error("er ging wat fout " + e);
-        }
-    }
-
     useEffect(() => {
         const token = localStorage.getItem('token');
+
         async function fetchPost() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}`,
@@ -58,6 +42,7 @@ function PostDetails() {
                 console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
             }
         }
+
         fetchPost();
 
         async function fetchComments() {
@@ -82,6 +67,7 @@ function PostDetails() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+
         async function fetchPatterns() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}/patterns`,
@@ -96,11 +82,9 @@ function PostDetails() {
                 console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
             }
         }
+
         fetchPatterns();
     }, [postDetail]);
-
-
-
 
     useEffect(() => {
         let masonryInstance;
@@ -119,12 +103,30 @@ function PostDetails() {
         };
     }, [patterns]);
 
+    async function handleFormSubmit(data) {
+        const token = localStorage.getItem('token');
+        try {
+            const result = await axios.post(`http://localhost:8080/posts/${id}/comments`, {
+                message: data.comment
+            }, {
+                headers: {
+                    Authorization: token,
+                    "Content-Type": "application/json"
+                }
+            });
+            setComments([...comments, result.data]);
+        } catch (e) {
+            console.error("er ging wat fout " + e);
+        }
+    }
+
     return <main>
         <section className="post-detail-section">
             {postDetail.image && <article className="post-big">
                 <span className="post-img">
                     <img src={postDetail.image.url} alt={postDetail.image.fileName}/>
-                    <Button classname="icon-button close-post" type="button" img={closeIcon} alt="Sluit icoon" onClick={(() => navigate("/"))}/>
+                    <Button classname="icon-button close-post" type="button" img={closeIcon} alt="Sluit icoon"
+                            onClick={(() => navigate("/"))}/>
                 </span>
                 <div className="details-comments">
                     <div className="post-details">
@@ -138,27 +140,29 @@ function PostDetails() {
                         <h2>{postDetail.title}</h2>
                         <p>{postDetail.description}</p>
                     </div>
-                    <div className="comment-section"> <div>
-                        {comments.length ? comments.map((comment) => (
-                            <Comment key={comment.id} img={userIcon} alt="profiel foto" username={comment.username} message={comment.message} timeStamp={comment.timeStamp} commentLikes={comment.likes}  />
-                        )) : <p>Schrijf een reactie voor deze post!</p>}
-                        {comments.length > 0 && <h5>22 reacties <img src={arrowDownBlue} alt="pijl icoon"/></h5>}
-                    </div>
+                    <div className="comment-section">
+                        <div>
+                            {comments.length ? comments.map((comment) => (
+                                <Comment key={comment.id} img={userIcon} alt="profiel foto" username={comment.username}
+                                         message={comment.message} timeStamp={comment.timeStamp}
+                                         commentLikes={comment.likes}/>
+                            )) : <p>Schrijf een reactie voor deze post!</p>}
+                            {comments.length > 0 && <h5>22 reacties <img src={arrowDownBlue} alt="pijl icoon"/></h5>}
+                        </div>
                         <div className="interaction-part">
                             <form className="comment-form" onSubmit={handleSubmit(handleFormSubmit)}>
                                 <InputFile className="text-field-red" inputId="comment" name="comment" type="text"
-                                       placeholder="Reageren..." register={register} errors={errors}/>
+                                           placeholder="Reageren..." register={register} errors={errors}/>
                                 <Button classname="comment-button blue interact-button" type="submit"
-                                        img={arrowDownWhite} alt="pijl icoon" />
+                                        img={arrowDownWhite} alt="pijl icoon"/>
                             </form>
 
                             <Button classname="interact-button like-button-big red" type="button"
                                     text={postDetail.likes} img={heart}
                                     alt="hartjes icoon"/>
-                            <Button classname="interact-button" type="button" img={addIcon} onClick={() => navigate("/new-pattern", { state: { id: id } })} alt="plus icoon"/>
-
+                            <Button classname="interact-button" type="button" img={addIcon}
+                                    onClick={() => navigate("/new-pattern", {state: {id: id}})} alt="plus icoon"/>
                         </div>
-
                     </div>
                 </div>
             </article>}

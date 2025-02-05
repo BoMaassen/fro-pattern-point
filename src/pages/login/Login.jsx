@@ -8,7 +8,7 @@ import axios from "axios";
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContect.jsx";
 
-function Login(){
+function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login, error} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -23,40 +23,43 @@ function Login(){
                 });
             login(result.headers.authorization);
 
-        } catch (e){
+        } catch (e) {
             console.error("er ging wat fout " + e);
         }
     }
 
     return <main>
         <section className="login-section">
-
-                <form onSubmit={handleSubmit(handleLoginSubmit)} className="login-form">
-                    <div className="upper-part">
+            <form onSubmit={handleSubmit(handleLoginSubmit)} className="login-form">
+                <div className="upper-part">
                     <img src={profilePicture} alt="Profiel foto"/>
                     <div className="fields">
-                        <InputText className="text-field-red form-field" inputId="username" name="username" labelName="Gebruikersnaam"
+                        <InputText className="text-field-red form-field" inputId="username" name="username"
+                                   labelName="Gebruikersnaam"
                                    validationRules={{
-                                   required: {value: true, message: "Gebruikersnaam is verplicht"}
-                               }} type="text" register={register} errors={errors}/>
+                                       required: {value: true, message: "Gebruikersnaam is verplicht"}
+                                   }} type="text" register={register} errors={errors}/>
 
-                        <InputText className="text-field-red form-field" inputId="password" name="password" labelName="Wachtwoord" validationRules={{
+                        <InputText className="text-field-red form-field" inputId="password" name="password"
+                                   labelName="Wachtwoord" validationRules={{
                             required: {value: true, message: "Wachtwoord is verplicht"}
                         }} type="password" register={register} errors={errors}/>
 
                     </div>
                     <Link className="reset-password" to={"/sign-up"}>Wachtwoord vergeten?</Link>
-                    </div>
-                    {error && <p className="error-message">{errors}</p>}
+                </div>
+                {error && <p className="error-message">{errors}</p>}
 
-                    <div className="buttons">
+                <div className="buttons">
 
-                        <Button classname="text-button yellow" type="button" onClick={() => {navigate("/sign-up")}} text="Account aanmaken?"/>
+                    <Button classname="text-button yellow" type="button" onClick={() => {
+                        navigate("/sign-up")
+                    }} text="Account aanmaken?"/>
 
-                        <Button classname="text-button orange" type="submit" text="Inloggen"/>
-                    </div>
+                    <Button classname="text-button orange" type="submit" text="Inloggen"/>
+                </div>
 
-                </form>
+            </form>
 
         </section>
 

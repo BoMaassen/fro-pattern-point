@@ -18,9 +18,7 @@ function Home() {
         let masonryInstance;
         imagesLoaded('.feed-container', () => {
             masonryInstance = new Masonry('.feed-container', {
-                itemSelector: ".post-large",
-                columnWidth: ".post-large",
-                gutter: 45,
+                itemSelector: ".post-large", columnWidth: ".post-large", gutter: 45,
             });
         });
 
@@ -32,8 +30,7 @@ function Home() {
 
     }, [posts]);
 
-    return (
-        <main>
+    return (<main>
             <section className="filter-menu">
                 <button className="filter-button" type="button"><img src={filterIcon} alt="filter icoon"/>Filter
                 </button>
@@ -57,11 +54,15 @@ function Home() {
             {error ? <h1 className="error-message">{error}</h1> :
                 <section className="feed-container">{posts.map((post) => {
                     return <div key={post.id}>
-                        {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title} img={post.image.url}
-                            alt={post.image.title} profilePiture={user.userIcon} username={post.username}
-                                             key={post.id}/></Link> }
-                    </div>})}
-            </section> }
+                        {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title}
+                                                                            img={post.image.url}
+                                                                            alt={post.image.title}
+                                                                            profilePiture={user.userIcon}
+                                                                            username={post.username}
+                                                                            key={post.id}/></Link>}
+                    </div>
+                })}
+                </section>}
         </main>
 
     )

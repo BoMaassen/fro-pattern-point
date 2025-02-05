@@ -15,14 +15,6 @@ function AuthContextProvider({children}){
         status: 'pending',
     });
 
-    const contextData ={
-        isAuth: auth.isAuth,
-        user: auth.user,
-        login,
-        logOut,
-        error,
-    }
-
     useEffect(() => {
         console.log("aplicatie refresht")
         const token = localStorage.getItem('token');
@@ -81,7 +73,15 @@ function AuthContextProvider({children}){
             status: "done",
         })
         console.log("Gebruiker is uitgelogd")
-        navigate("/");
+        navigate("/login");
+    }
+
+    const contextData ={
+        isAuth: auth.isAuth,
+        user: auth.user,
+        login,
+        logOut,
+        error,
     }
 
     return (

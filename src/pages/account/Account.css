@@ -1,10 +1,10 @@
-.account-container{
+.account-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.user-card, .notifications{
+.user-card, .notifications {
     border-radius: 20px;
     padding: 30px;
     flex-basis: 338px;
@@ -14,31 +14,32 @@
     justify-content: space-between;
 }
 
-.aside{
+.user-comments {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.post-overview{
+.post-overview {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 870px;
     border-radius: 20px;
 }
-.maps{
+
+.maps {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.overview, .maps{
+.overview, .maps {
     width: 794px;
     padding: 10px 0;
 }
 
-.post-overview, .user-card{
+.post-overview, .user-card {
     background-color: var(--primary-color-20);
 }
 

@@ -1,6 +1,6 @@
 import {jwtDecode} from "jwt-decode";
 
-function isTokenValid(token){
+function isTokenValid(token) {
     const decode = jwtDecode(token);
     const expiration = decode.exp
     const now = new Date().getTime() / 1000;

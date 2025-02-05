@@ -8,13 +8,6 @@ function PostsContextProvider({children}){
     const [loading, toggleLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const contextData = {
-        posts,
-        loading,
-        error,
-        fetchPosts,
-    };
-
     useEffect(() => {
         fetchPosts();
     }, []);
@@ -43,6 +36,13 @@ function PostsContextProvider({children}){
             controller.abort();
         }
     }
+
+    const contextData = {
+        posts,
+        loading,
+        error,
+        fetchPosts,
+    };
 
     return (
         <PostsContext.Provider value={contextData}>

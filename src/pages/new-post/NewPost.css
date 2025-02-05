@@ -1,41 +1,38 @@
 /*-----Flexbox-----*/
-
-.new-post-container,.form-field-right, .form-field-left, .form-field-right label, .form-field-left label{
+.new-post-container, .form-field-right, .form-field-left, .form-field-right label, .form-field-left label {
     display: flex;
     flex-direction: column;
 }
 
-.outer-container, .form-fields, .preview-buttons, .placeholder, .placeholder-img, .buttons{
+.outer-container, .form-fields, .preview-buttons, .placeholder, .placeholder-img, .buttons {
     display: flex;
     flex-direction: row;
 }
 
-.outer-container, .form-field-left{
+.outer-container, .form-field-left {
     justify-content: center;
 }
 
-.preview-buttons, .placeholder, .buttons{
+.preview-buttons, .placeholder, .buttons {
     justify-content: space-between;
 }
 
-.form-field-left, .form-field-left label, .buttons{
+.form-field-left, .form-field-left label, .buttons {
     align-items: center;
 }
 
 /*-----border radius-----*/
-
-.new-post-container, .form-fields, .placeholder-img, .preview-img{
+.new-post-container, .form-fields, .placeholder-img, .preview-img {
     border-radius: 20px;
 }
 
 /*-----Outer container-----*/
-
-.outer-container{
+.outer-container {
     margin: 30px 0;
 }
-/*-----New post container-----*/
 
-.new-post-container{
+/*-----New post container-----*/
+.new-post-container {
     background-color: var(--primary-color-20);
     padding: 37px;
     align-items: center;
@@ -43,17 +40,16 @@
 }
 
 /*-----Form-----*/
-
-.form-new-post{
+.form-new-post {
     margin-top: 40px;
 }
 
-.form-fields{
+.form-fields {
     background-color: var(--background-color);
     flex-basis: 832px;
 }
 
-.form-field-right, .form-field-left{
+.form-field-right, .form-field-left {
     width: 416px;
     height: 467px;
     padding: 30px 45px;
@@ -61,18 +57,18 @@
 
 .form-field-right {
     justify-content: space-evenly;
-    border-left: 2px solid var(--text-color-30) ;
+    border-left: 2px solid var(--text-color-30);
 }
 
-.form-field-left{
+.form-field-left {
     position: relative;
 }
 
-.form-field-left span{
+.form-field-left span {
     position: absolute;
 }
 
-.form-field-left input{
+.form-field-left input {
     opacity: 0;
 }
 
@@ -81,25 +77,25 @@
 }
 
 /*-----Preview images -----*/
-.preview-buttons{
+.preview-buttons {
     padding-top: 20px;
 }
 
-.placeholder{
+.placeholder {
     width: 390px;
 }
 
-.placeholder-img{
+.placeholder-img {
     width: 116px;
     height: 87px;
     background-color: var(--background-color);
 }
 
-.preview-img{
+.preview-img {
     width: 100%;
 }
 
-.delete-img{
+.delete-img {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -107,11 +103,11 @@
 
 /*-----Buttons-----*/
 
-.buttons{
+.buttons {
     width: 390px;
 }
 
-.close-form{
+.close-form {
     position: absolute;
     right: 10px;
     top: 10px;

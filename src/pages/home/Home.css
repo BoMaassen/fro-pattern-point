@@ -1,8 +1,3 @@
-/*-----Algemeen-----*/
-main {
-    padding: 0 70px;
-}
-
 /*-----Filter menu-----*/
 .filter-menu, .right-section-container, .categories-container, .filter-button, .sort-button, .arrow-button {
     display: flex;

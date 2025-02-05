@@ -39,7 +39,8 @@ function Account() {
                         <div className="overview"> {posts.map((post) => {
                             return <div key={post.id}>
                                 {post.image &&
-                                    <Link to={`/posts/${post.id}`}><Post className="post-small" title={post.title}
+                                    <Link to={`/posts/${post.id}`}>
+                                        <Post className="post-small" title={post.title}
                                                                          img={post.image.url}
                                                                          alt={post.image.title}
                                                                          profilePiture={user.userIcon}
@@ -49,23 +50,19 @@ function Account() {
                         })}
                         </div>}
                 </div>
-
-                <aside className="aside">
+                <div className="user-comments">
                     <div className="user-card">
-                        <h2>@{user.username}</h2>
-                        <p>{user.biography} </p>
-
+                        <div>
+                            <h2>@{user.username}</h2>
+                            <p>{user.biography} </p>
+                        </div>
                         {isAuth && <Button classname="text-button blue" type="button" onClick={logOut} text="Log uit"/>}
                     </div>
-
                     <div className="notifications">
                         <h2>placeholder voor meldingen</h2>
                     </div>
-                </aside>
-
+                </div>
             </section>
-
-
         </main>
 
     )

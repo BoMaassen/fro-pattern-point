@@ -21,38 +21,6 @@ function NewPost() {
     const navigate = useNavigate();
     const {fetchPosts} = useContext(PostsContext);
 
-    function fileToUrl(event) {
-        const files = event.target.files
-        const fileArray = [...files];
-        setFiles(fileArray);
-        const urlsArray = fileArray.map((file) => {
-            return {url: URL.createObjectURL(file), fileName: file.name,}
-        })
-        setUrls(urlsArray);
-    }
-        async function handleFormSubmit(data) {
-            const token = localStorage.getItem('token');
-            const formData = {...data, isDraft};
-
-            try {
-                const result = await axios.post("http://localhost:8080/posts", {
-                    title: formData.title,
-                    category: formData.category,
-                    description: formData.description,
-                    isDraft: formData.isDraft,
-                },{
-                    headers: {
-                        Authorization: token,
-                        "Content-Type": "application/json"
-                    }
-                });
-                setPostId(result.data.id);
-                navigate("/account");
-            } catch (e){
-                console.error("er ging wat fout " + e);
-            }
-        }
-
     useEffect(() => {
         async function sendImage() {
             if (!postId || postId === 0) return;
@@ -74,20 +42,57 @@ function NewPost() {
                 console.error(e)
             }
         }
+
         void sendImage();
     }, [postId]);
+
+    function fileToUrl(event) {
+        const files = event.target.files
+        const fileArray = [...files];
+        setFiles(fileArray);
+        const urlsArray = fileArray.map((file) => {
+            return {url: URL.createObjectURL(file), fileName: file.name,}
+        })
+        setUrls(urlsArray);
+    }
+
+    async function handleFormSubmit(data) {
+        const token = localStorage.getItem('token');
+        const formData = {...data, isDraft};
+
+        try {
+            const result = await axios.post("http://localhost:8080/posts", {
+                title: formData.title,
+                category: formData.category,
+                description: formData.description,
+                isDraft: formData.isDraft,
+            }, {
+                headers: {
+                    Authorization: token,
+                    "Content-Type": "application/json"
+                }
+            });
+            setPostId(result.data.id);
+            navigate("/account");
+        } catch (e) {
+            console.error("er ging wat fout " + e);
+        }
+    }
 
     return (
         <main>
             <section className="outer-container">
                 <div className="new-post-container">
-                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon" onClick={(() => navigate("/"))}/>
-                    <form className="form-new-post"  onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Button classname="icon-button close-form" type="button" img={closeIcon} alt="Sluit icoon"
+                            onClick={(() => navigate("/"))}/>
+                    <form className="form-new-post" onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="form-fields">
                             <div className="form-field-left">
-                                <InputFile inputId="content" name="content" labelName="Upload foto's in png of jpeg" validationRules={{
-                                    required: {value: true, message: "Je moet een foto uploaden"},
-                                }} multiple="multiple" type="file" accept="image/png, image/jpeg" register={register}
+                                <InputFile inputId="content" name="content" labelName="Upload foto's in png of jpeg"
+                                           validationRules={{
+                                               required: {value: true, message: "Je moet een foto uploaden"},
+                                           }} multiple="multiple" type="file" accept="image/png, image/jpeg"
+                                           register={register}
                                            errors={errors} onChange={fileToUrl}>
                                     <img src={uploadIcon} alt="upload button"/>
                                 </InputFile>
@@ -102,17 +107,21 @@ function NewPost() {
                             </div>
 
                             <div className="form-field-right">
-                                <InputText className="text-field-red" inputId="title" name="title" labelName="Titel" validationRules={{
-                                    required: !isDraft ? {value: true, message: "Titel is verplicht"} : false,
-                                    minLength: !isDraft ? {
-                                        value: 5,
-                                        message: "Titel moet minstens 5 karakters bevatten"
-                                    } : false,
-                                    maxLength: !isDraft ? {
-                                        value: 50,
-                                        message: "Titel mag maximaal 50 karakters bevatten"
-                                    } : false,
-                                }} type="text" register={register} errors={errors}/>
+                                <InputText className="text-field-red" inputId="title" name="title" labelName="Titel"
+                                           validationRules={{
+                                               required: !isDraft ? {
+                                                   value: true,
+                                                   message: "Titel is verplicht"
+                                               } : false,
+                                               minLength: !isDraft ? {
+                                                   value: 5,
+                                                   message: "Titel moet minstens 5 karakters bevatten"
+                                               } : false,
+                                               maxLength: !isDraft ? {
+                                                   value: 50,
+                                                   message: "Titel mag maximaal 50 karakters bevatten"
+                                               } : false,
+                                           }} type="text" register={register} errors={errors}/>
 
                                 <Select className="text-field-red" selectId="category" labelName="Categorie"
                                         validationRules={{
@@ -123,7 +132,8 @@ function NewPost() {
                                         }} options={["", "Truien", "Broeken", "Mutsen", "Sjaals", "Tassen", "Kuffels"]}
                                         register={register} errors={errors}/>
 
-                                <Textarea className="text-field-red" textareaId="description" rows="9" labelName="Beschrijving"
+                                <Textarea className="text-field-red" textareaId="description" rows="9"
+                                          labelName="Beschrijving"
                                           validationRules={{
                                               required: !isDraft ? {
                                                   value: true,

@@ -1,91 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Coiny&family=Lexend:wght@100..900&display=swap');
 /*-----CSS RESET-----*/
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /*-----ROOT-----*/
-:root{
-  --primary-color: #D74E09;
-  --primary-color-20: #D74E0933;
-  --primary-color-10: #D74E0919;
-  --secondary-color: #F2BB05;
-  --secondary-color-30: #F2BB054d;
-  --tertiary-color: #6E0E0A;
-  --tertiary-color-30: #6E0E0A4d ;
-  --text-color: #124E78;
-  --text-color-30: #124E784d;
-  --background-color: #F0F0C9;
+:root {
+    --primary-color: #D74E09;
+    --primary-color-20: #D74E0933;
+    --primary-color-10: #D74E0919;
+    --secondary-color: #F2BB05;
+    --secondary-color-30: #F2BB054d;
+    --tertiary-color: #6E0E0A;
+    --tertiary-color-30: #6E0E0A4d;
+    --text-color: #124E78;
+    --text-color-30: #124E784d;
+    --background-color: #F0F0C9;
 }
 
-body{
-  background-color: var(--background-color);
+/*-----Algemeen-----*/
+main {
+    padding: 0 70px;
+}
+
+body {
+    background-color: var(--background-color);
 }
 
 /*-----kleuren-----*/
 
-.yellow{
-  background-color: var(--secondary-color);
+.yellow {
+    background-color: var(--secondary-color);
 }
 
-.orange{
-  background-color: var(--primary-color);
+.orange {
+    background-color: var(--primary-color);
 }
 
-.red{
-  background-color: var(--tertiary-color);
+.red {
+    background-color: var(--tertiary-color);
 }
 
-.blue{
-  background-color: var(--text-color);
+.blue {
+    background-color: var(--text-color);
 }
-
 
 /*-----TYPOGRAFIE-----*/
 h1, h2, h3, h4, h5, label, a, legend {
-  font-family: "Coiny", serif;
-  color: var(--text-color);
+    font-family: "Coiny", serif;
+    color: var(--text-color);
 }
 
 p {
-  color: var(--text-color);
-  font-family: "Lexend", serif;
+    color: var(--text-color);
+    font-family: "Lexend", serif;
 
 }
 
 /*-----BUTTONS-----*/
-button, input, input::placeholder, textarea, select{
-  font-family: "Coiny", serif;
-  color: var(--background-color);
-}
-
-/*-----InputText-----*/
-.text-field-red {
-  background-color: var(--tertiary-color-30);
-  border-radius: 20px;
-  border: none;
-}
-input::placeholder{
-  font-size: 10px;
-}
-textarea{
-  padding: 7px;
+button, input, input::placeholder, textarea, select {
+    font-family: "Coiny", serif;
+    color: var(--background-color);
 }
 
 /*-----Links-----*/
 a, a:visited {
-  text-decoration: none;
-  color: var(--text-color);
+    text-decoration: none;
+    color: var(--text-color);
 }
 
 /*-----Lists-----*/
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 /*-----Message-----*/
-.error-message{
-  color: var(--tertiary-color);
+.error-message {
+    color: var(--tertiary-color);
 }
