@@ -55,7 +55,6 @@ function AuthContextProvider({children}){
                 status: 'done',
             });
             console.log("Gebruiker is ingelogd!");
-            navigate("/");
 
         }catch (e){
             setError(e + " Er is wat fout gegaan met inloggen.")

@@ -7,13 +7,13 @@ import Home from "./pages/home/Home.jsx";
 import NewPost from "./pages/new-post/NewPost.jsx";
 import Account from "./pages/account/Account.jsx";
 import Button from "./components/button/Button.jsx";
-import Login from "./pages/login/Login.jsx";
 import SignUp from "./pages/sign-up/SignUp.jsx";
 import {AuthContext} from "./context/AuthContect.jsx";
 import {useContext} from "react";
 import NewPattern from "./pages/new-pattern/NewPattern.jsx";
 import PostDetails from "./pages/post-details/PostDetails.jsx";
 import NotFound from "./pages/not-found/NotFound.jsx";
+import Login from "./pages/login/Login.jsx";
 
 
 function App() {
@@ -39,8 +39,8 @@ function App() {
             </nav>
             </header>
             <Routes>
-                <Route path="/login" element={<Login/>}></Route>
-                <Route path="/sign-up" element={<SignUp/>}></Route>
+                <Route path="/login" element={!isAuth ? <Login/> : <Navigate to="/"/>}></Route>
+                <Route path="/sign-up" element={!isAuth ? <SignUp/> : <Navigate to="/"/>}></Route>
                 <Route path="/" element={isAuth ? <Home/> : <Navigate to="/sign-up"/> }></Route>
                 <Route path="/new-post" element={isAuth ? <NewPost/> : <Navigate to="/sign-up"/>}></Route>
                 <Route path="/account" element={isAuth ? <Account/> : <Navigate to="/sign-up"/>}></Route>

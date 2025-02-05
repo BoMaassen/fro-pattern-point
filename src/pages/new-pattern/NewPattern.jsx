@@ -25,8 +25,6 @@ function NewPattern() {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
     const {id} = useParams();
-   /* const location = useLocation();
-    const postId = location.state?.id;*/
 
     useEffect(() => {
         if (!patternId || patternId === 0) return;
@@ -50,7 +48,7 @@ function NewPattern() {
 
         async function sendSteps() {
             try {
-                const result = await axios.post(`http://localhost:8080/patterns/${patternId}/steps`, [{
+                await axios.post(`http://localhost:8080/patterns/${patternId}/steps`, [{
                     title: formData.titleStep1, description: formData.descriptionStep1
                 }, {
                     title: formData.titleStep2, description: formData.descriptionStep2
@@ -59,16 +57,14 @@ function NewPattern() {
                         Authorization: token, "Content-Type": "application/json"
                     },
                 })
-                console.log(result.data);
             } catch (e) {
                 console.error(e)
             }
         }
 
         async function sendAbbreviations() {
-
             try {
-                const result = await axios.post(`http://localhost:8080/patterns/${patternId}/abbreviations`, [{
+               await axios.post(`http://localhost:8080/patterns/${patternId}/abbreviations`, [{
                     abbreviated: formData.abbreviated1, fullForm: formData.fullForm1
                 }, {
                     abbreviated: formData.abbreviated2, fullForm: formData.fullForm2
@@ -77,7 +73,6 @@ function NewPattern() {
                         Authorization: token, "Content-Type": "application/json"
                     },
                 })
-                console.log(result.data);
             } catch (e) {
                 console.error(e)
             }
@@ -134,6 +129,7 @@ function NewPattern() {
                 }
             });
             setPatternId(result.data.id);
+
         } catch (e) {
             console.error("er ging wat fout " + e);
         }

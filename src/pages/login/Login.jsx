@@ -22,7 +22,7 @@ function Login() {
 
                 });
             login(result.headers.authorization);
-
+            navigate("/");
         } catch (e) {
             console.error("er ging wat fout " + e);
         }
