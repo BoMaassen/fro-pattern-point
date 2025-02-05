@@ -44,7 +44,7 @@ function App() {
                 <Route path="/" element={isAuth ? <Home/> : <Navigate to="/sign-up"/> }></Route>
                 <Route path="/new-post" element={isAuth ? <NewPost/> : <Navigate to="/sign-up"/>}></Route>
                 <Route path="/account" element={isAuth ? <Account/> : <Navigate to="/sign-up"/>}></Route>
-                <Route path="/new-pattern" element={isAuth ? <NewPattern/> : <Navigate to="/sign-up"/> }></Route>
+                <Route path="/posts/:id/new-pattern" element={isAuth ? <NewPattern/> : <Navigate to="/sign-up"/> }></Route>
                 <Route path="/posts/:id" element={isAuth ? <PostDetails/> : <Navigate to="/sign-up"/> }></Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

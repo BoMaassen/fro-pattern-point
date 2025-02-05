@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import Button from "../../components/button/Button.jsx";
 import closeIcon from "../../assets/icons/close icon.svg";
@@ -24,8 +24,9 @@ function NewPattern() {
     const [formData, setFormdata] = useState({});
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
-    const location = useLocation();
-    const postId = location.state?.id;
+    const {id} = useParams();
+   /* const location = useLocation();
+    const postId = location.state?.id;*/
 
     useEffect(() => {
         if (!patternId || patternId === 0) return;
@@ -41,6 +42,7 @@ function NewPattern() {
                     },
                 })
                 console.log(result.data);
+                navigate(`/posts/${id}`);
             } catch (e) {
                 console.error(e)
             }
@@ -108,13 +110,13 @@ function NewPattern() {
         const token = localStorage.getItem('token');
         setFormdata(data);
 
-        if (!postId) {
+        if (!id) {
             console.error("Post ID is not available.");
             return;
         }
 
         try {
-            const result = await axios.post(`http://localhost:8080/posts/${postId}/patterns`, {
+            const result = await axios.post(`http://localhost:8080/posts/${id}/patterns`, {
                 title: data.title,
                 level: data.level,
                 description: data.description,
@@ -132,7 +134,6 @@ function NewPattern() {
                 }
             });
             setPatternId(result.data.id);
-            navigate(`/posts/${postId}`);
         } catch (e) {
             console.error("er ging wat fout " + e);
         }

@@ -161,7 +161,7 @@ function PostDetails() {
                                     text={postDetail.likes} img={heart}
                                     alt="hartjes icoon"/>
                             <Button classname="interact-button" type="button" img={addIcon}
-                                    onClick={() => navigate("/new-pattern", {state: {id: id}})} alt="plus icoon"/>
+                                    onClick={() => navigate(`/posts/${id}/new-pattern`)} alt="plus icoon"/>
                         </div>
                     </div>
                 </div>
