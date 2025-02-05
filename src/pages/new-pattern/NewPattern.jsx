@@ -371,7 +371,6 @@ function NewPattern() {
                                               } : false,
                                           }} register={register} errors={errors}/>
                             </div>
-                            <Button classname="add-icon add-step" type="button" img={addIcon} alt="plus icoon"/>
                         </div>
                     </div>}
                     <div className="preview-buttons">
