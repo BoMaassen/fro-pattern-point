@@ -23,7 +23,7 @@ function PostDetails() {
     const [comments, setComments] = useState([]);
     const navigate = useNavigate();
     const {id} = useParams();
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const {register, reset, handleSubmit, formState: {errors}} = useForm();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -115,6 +115,7 @@ function PostDetails() {
                 }
             });
             setComments([...comments, result.data]);
+            reset();
         } catch (e) {
             console.error("er ging wat fout " + e);
         }
@@ -141,7 +142,7 @@ function PostDetails() {
                         <p>{postDetail.description}</p>
                     </div>
                     <div className="comment-section">
-                        <div>
+                        <div className="comments">
                             {comments.length ? comments.map((comment) => (
                                 <Comment key={comment.id} img={userIcon} alt="profiel foto" username={comment.username}
                                          message={comment.message} timeStamp={comment.timeStamp}

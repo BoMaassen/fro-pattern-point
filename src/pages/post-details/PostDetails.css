@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    overflow-x: hidden;
 }
 
 .post-big {
@@ -45,6 +46,7 @@
     padding: 20px;
     border-radius: 0 20px 0 0;
     flex-basis: 216px;
+    width: 370px;
 }
 
 .user-stats {
@@ -53,17 +55,39 @@
     gap: 10px;
 }
 
-/*-----Comments-----*/
-
 .comment-section {
     background-color: var(--primary-color-10);
     padding: 15px;
     border-radius: 0 0 20px 0;
-    flex-basis: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 400px; /* of een andere vaste hoogte die je wilt */
+    overflow-y: auto; /* Laat de reacties verticaal scrollen */
+    overflow-x: hidden; /* Voorkomt horizontaal scrollen */
+    position: relative; /* Zorgt ervoor dat de sticky interaction-part goed werkt binnen de comment-section */
+    width: 370px;
 }
+.comments{
+    overflow-y: auto;
+}
+
+/*-----Interaction part moet vastblijven onderaan de comment-section*/
+.interaction-part {
+    position: sticky; /* Sticky maakt het vast binnen de container */
+    bottom: 0; /* Dit plakt de interactie onderaan de comment-section */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px; /* Zorg ervoor dat de interactie-part een achtergrondkleur heeft */
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 5; /* Zorg ervoor dat het interactie deel boven de andere content komt */
+    width: 100%; /* Zorg ervoor dat de interactie altijd de volledige breedte van de container heeft */
+    box-sizing: border-box; /* Zorgt ervoor dat padding geen extra breedte toevoegt */
+}
+
+
 
 /*-----interaction-----*/
 .comment-form {
@@ -72,12 +96,6 @@
     gap: 3px;
 }
 
-.interaction-part {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-}
 
 .interact-button {
     border: none;
