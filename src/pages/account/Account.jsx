@@ -1,34 +1,15 @@
 import "./Account.css";
 import Post from "../../components/post/Post.jsx";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import imagesLoaded from "imagesloaded";
 import Masonry from "masonry-layout";
-import axios from "axios";
 import {AuthContext} from "../../context/AuthContect.jsx";
+import {PostsContext} from "../../context/PostsContext.jsx";
+import {Link} from "react-router-dom";
 
 function Account(){
-    const [posts, setPosts] = useState([]);
     const {user} = useContext(AuthContext);
-
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        async function fetchPosts(){
-            try {
-                const response = await axios.get("http://localhost:8080/posts", {
-                    headers: {
-                        Authorization: token,
-                    }})
-
-                setPosts(response.data);
-            }
-            catch (e){
-                console.error("Er ging iets mis met het ophalen van de posts probeer het opniew! " + e)
-            }
-        }
-        fetchPosts();
-
-    }, []);
+    const {posts} = useContext(PostsContext);
 
     useEffect(() => {
         let masonryInstance;
@@ -55,9 +36,9 @@ function Account(){
                     <div className="maps"><h2>placeholder voor buttons</h2></div>
                     <div className="overview"> {posts.map((post) => {
                         return <div key={post.id}>
-                            {post.image && <Post className="post-small" title={post.title} img={post.image.url}
+                            {post.image && <Link to={`/posts/${post.id}`}><Post className="post-small" title={post.title} img={post.image.url}
                                                  alt={post.image.title} profilePiture={user.userIcon} username={post.username}
-                                                 key={post.id}/>}
+                                                 key={post.id}/></Link>}
                         </div>
                     })}
                     </div>

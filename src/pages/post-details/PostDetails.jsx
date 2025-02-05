@@ -44,10 +44,12 @@ function PostDetails() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        const controller = new AbortController();
         async function fetchPost() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}`,
                     {
+                        signal: controller.signal,
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: token,
@@ -65,6 +67,7 @@ function PostDetails() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}/comments`,
                     {
+                        signal: controller.signal,
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: token,
@@ -78,14 +81,20 @@ function PostDetails() {
 
         fetchComments();
 
+        return function cleanup(){
+            controller.abort();
+        }
+
     }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        const controller = new AbortController();
         async function fetchPatterns() {
             try {
                 const result = await axios.get(`http://localhost:8080/posts/${id}/patterns`,
                     {
+                        signal: controller.signal,
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: token,
@@ -97,10 +106,11 @@ function PostDetails() {
             }
         }
         fetchPatterns();
+        return function cleanup(){
+            controller.abort();
+        }
+
     }, [postDetail]);
-
-
-
 
     useEffect(() => {
         let masonryInstance;

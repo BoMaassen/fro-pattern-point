@@ -41,21 +41,21 @@ function AuthContextProvider({children}){
     async function login(token){
         localStorage.setItem('token', token);
         const decodedToken = jwtDecode(token);
+        const controller = new AbortController();
         try {
             const result = await axios.get(`http://localhost:8080/users/${decodedToken.sub}`,{
+                signal: controller.signal,
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: token
                 }
             })
-
             setAuth({
                 isAuth: true,
                 user: {
                     username: result.data.username,
                     email: result.data.email,
                     id: result.data.id,
-
                 },
                 status: 'done',
             });
@@ -64,10 +64,10 @@ function AuthContextProvider({children}){
 
         }catch (e){
             console.error(e + " Er is wat fout gegaan.")
-
         }
-
-
+        return function cleanup(){
+            controller.abort();
+        }
     }
 
     function logOut(){

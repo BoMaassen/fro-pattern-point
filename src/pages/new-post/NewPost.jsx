@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Input from "../../components/input/Input.jsx";
 import Select from "../../components/select/Select.jsx";
 import Textarea from "../../components/textarea/Textarea.jsx";
@@ -9,6 +9,7 @@ import closeIcon from "../../assets/icons/close icon.svg"
 import uploadIcon from "../../assets/icons/upload icon.svg"
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {PostsContext} from "../../context/PostsContext.jsx";
 
 function NewPost() {
     const [isDraft, toggleIsDraft] = useState(false);
@@ -17,7 +18,7 @@ function NewPost() {
     const [postId, setPostId] = useState(0);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
-
+    const {fetchPosts} = useContext(PostsContext);
 
     function fileToUrl(event) {
         const files = event.target.files
@@ -28,8 +29,6 @@ function NewPost() {
         })
         setUrls(urlsArray);
     }
-
-
         async function handleFormSubmit(data) {
             const token = localStorage.getItem('token');
             const formData = {...data, isDraft};
@@ -69,15 +68,13 @@ function NewPost() {
                         },
                     })
                 console.log(result.data);
+                fetchPosts();
             } catch (e) {
                 console.error(e)
             }
         }
         void sendImage();
     }, [postId]);
-
-
-
 
     return (
         <main>
