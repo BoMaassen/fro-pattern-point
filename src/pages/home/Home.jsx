@@ -42,7 +42,6 @@ function Home() {
                     <button type="button">Mutsen</button>
                     <button type="button">Knuffles</button>
                     <button type="button">Sjaals</button>
-
                 </div>
                 <div className="right-section-container">
                     <button className="arrow-button" type="button"><img src={arrowButton} alt="pijl naar rechts icoon"/>

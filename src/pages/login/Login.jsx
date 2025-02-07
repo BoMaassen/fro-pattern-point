@@ -5,15 +5,17 @@ import InputText from "../../components/input-text/InputText.jsx";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {AuthContext} from "../../context/AuthContect.jsx";
 
 function Login() {
+    const [loginError, setLoginError] = useState("");
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const {login, error} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     const navigate = useNavigate();
 
     async function handleLoginSubmit(data) {
+        setLoginError("");
         try {
             const result = await axios.post("http://localhost:8080/login",
                 {
@@ -24,7 +26,7 @@ function Login() {
             login(result.headers.authorization);
             navigate("/");
         } catch (e) {
-            console.error("er ging wat fout " + e);
+          setLoginError("Je gebruikersnaam of wachtwoord klopt niet");
         }
     }
 
@@ -48,7 +50,7 @@ function Login() {
                     </div>
                     <Link className="reset-password" to={"/sign-up"}>Wachtwoord vergeten?</Link>
                 </div>
-                {error && <p className="error-message">{errors}</p>}
+                {loginError && <p className="error-message">{loginError}</p>}
 
                 <div className="buttons">
 
