@@ -15,6 +15,7 @@ function Home() {
     const {posts, error} = useContext(PostsContext);
 
     useEffect(() => {
+    if (posts.length === 0) return ;
         let masonryInstance;
         imagesLoaded('.feed-container', () => {
             masonryInstance = new Masonry('.feed-container', {
@@ -27,7 +28,6 @@ function Home() {
                 masonryInstance.destroy();
             }
         };
-
     }, [posts]);
 
     return (<main>
@@ -51,7 +51,7 @@ function Home() {
                                                                                alt="pijl naar beneden icoon"/></button>
                 </div>
             </section>
-            {error ? <h1 className="error-message">{error}</h1> :
+            {error && <h1 className="error-message">{error}</h1>} {posts.length > 0 &&
                 <section className="feed-container">{posts.map((post) => {
                     return <div key={post.id}>
                         {post.image && <Link to={`/posts/${post.id}`}><Post className="post-large" title={post.title}

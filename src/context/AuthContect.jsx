@@ -58,6 +58,12 @@ function AuthContextProvider({children}){
 
         }catch (e){
             setError(e + " Er is wat fout gegaan met inloggen.")
+            localStorage.removeItem("token");
+            setAuth({
+                isAuth: false,
+                user: null,
+                status: "done",
+            });
         }
         return function cleanup(){
             controller.abort();

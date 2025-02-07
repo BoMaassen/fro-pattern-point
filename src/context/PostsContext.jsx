@@ -1,5 +1,6 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
+import {AuthContext} from "./AuthContect.jsx";
 
 export const PostsContext = createContext([]);
 
@@ -7,10 +8,13 @@ function PostsContextProvider({children}){
     const [posts, setPosts] = useState([]);
     const [loading, toggleLoading] = useState(false);
     const [error, setError] = useState("");
+    const { isAuth } = useContext(AuthContext);
 
     useEffect(() => {
-        fetchPosts();
-    }, []);
+        if (isAuth){
+            fetchPosts();
+        }
+    }, [isAuth]);
 
     async function fetchPosts(){
         const token = localStorage.getItem('token');
