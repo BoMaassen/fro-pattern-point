@@ -51,6 +51,7 @@ function AuthContextProvider({children}){
                     email: result.data.email,
                     id: result.data.id,
                     biography: result.data.biography,
+                    role: result.data.role,
                 },
                 status: 'done',
             });

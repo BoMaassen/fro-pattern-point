@@ -1,6 +1,6 @@
 import "./PostDetails.css"
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import Post from "../../components/post/Post.jsx";
 import userIconPlus from "../../assets/icons/user icon plus.svg"
@@ -16,12 +16,14 @@ import Comment from "../../components/comment/Comment.jsx";
 import imagesLoaded from "imagesloaded";
 import Masonry from "masonry-layout";
 import InputFile from "../../components/input-file/InputFile.jsx";
+import {AuthContext} from "../../context/AuthContect.jsx";
 
 function PostDetails() {
     const [postDetail, setPostDetail] = useState({});
     const [patterns, setPatterns] = useState([]);
     const [comments, setComments] = useState([]);
     const navigate = useNavigate();
+    const {user} = useContext(AuthContext);
     const {id} = useParams();
     const {register, reset, handleSubmit, formState: {errors}} = useForm();
 
@@ -161,8 +163,9 @@ function PostDetails() {
                             <Button classname="interact-button like-button-big red" type="button"
                                     text={postDetail.likes} img={heart}
                                     alt="hartjes icoon"/>
+                            {user && user.role === "PATROONMAKER" &&
                             <Button classname="interact-button" type="button" img={addIcon}
-                                    onClick={() => navigate(`/posts/${id}/new-pattern`)} alt="plus icoon"/>
+                                    onClick={() => navigate(`/posts/${id}/new-pattern`)} alt="plus icoon"/>}
                         </div>
                     </div>
                 </div>
