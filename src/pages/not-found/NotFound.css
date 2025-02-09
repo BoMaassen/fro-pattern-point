@@ -1,0 +1,33 @@
+.not-found-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.not-found-section h1 {
+    font-size: 2em;
+    padding: 20px;
+}
+
+.not-found-section a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.error-img-container {
+    display: flex;
+    width: 600px;
+}
+
+.error-img-container img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.arrow-error-page {
+    transform: rotate(180deg);
+    width: 30px;
+}

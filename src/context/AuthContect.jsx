@@ -7,19 +7,13 @@ import isTokenValid from "../helpers/isTokenValid.js";
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}){
-    const navigate = useNavigate();
+    const [error, setError] = useState("");
     const [auth, setAuth] = useState({
         isAuth: false,
         user: null,
         status: 'pending',
     });
-
-    const contextData ={
-        isAuth: auth.isAuth,
-        user: auth.user,
-        login: login,
-        logOut: logOut,
-    }
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("aplicatie refresht")
@@ -34,42 +28,47 @@ function AuthContextProvider({children}){
                 user: null,
                 status: 'done',
             });
-
         }
     }, []);
 
     async function login(token){
         localStorage.setItem('token', token);
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken);
-
+        const controller = new AbortController();
+        setError("");
         try {
             const result = await axios.get(`http://localhost:8080/users/${decodedToken.sub}`,{
+                signal: controller.signal,
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: token
                 }
             })
-
             setAuth({
                 isAuth: true,
                 user: {
                     username: result.data.username,
                     email: result.data.email,
                     id: result.data.id,
-
+                    biography: result.data.biography,
+                    role: result.data.role,
                 },
                 status: 'done',
             });
             console.log("Gebruiker is ingelogd!");
-            /*navigate("/account");*/
 
         }catch (e){
-            console.error(e + " Er is wat fout gegaan.")
-
+            setError(e + " Er is wat fout gegaan met inloggen.")
+            localStorage.removeItem("token");
+            setAuth({
+                isAuth: false,
+                user: null,
+                status: "done",
+            });
         }
-
-
+        return function cleanup(){
+            controller.abort();
+        }
     }
 
     function logOut(){
@@ -80,7 +79,15 @@ function AuthContextProvider({children}){
             status: "done",
         })
         console.log("Gebruiker is uitgelogd")
-        navigate("/");
+        navigate("/login");
+    }
+
+    const contextData ={
+        isAuth: auth.isAuth,
+        user: auth.user,
+        login,
+        logOut,
+        error,
     }
 
     return (

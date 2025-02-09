@@ -1,33 +1,33 @@
-
 /*-----Post-----*/
 .post-large {
     max-width: 224px;
     margin-bottom: 45px;
-
 }
-.post-small{
+
+.post-small {
     max-width: 187px;
     margin-bottom: 15px;
+    font-size: 0.8em;
 }
 
-.image-wrapper{
+.image-wrapper {
     display: flex;
 }
 
 .image-wrapper img {
     width: 100%;
-    border-radius: 20px 20px 0 0 ;
+    border-radius: 20px 20px 0 0;
 }
 
-.post-info{
+.post-info {
     background-color: var(--secondary-color-30);
     border-radius: 0 0 20px 20px;
     padding: 5px 10px;
 }
-.user-info{
+
+.user-info {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
-
 }

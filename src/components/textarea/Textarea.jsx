@@ -1,3 +1,5 @@
+import "./Textarea.css"
+
 function Textarea({className, textareaId, labelName, validationRules, rows, register, errors}) {
     return (
         <>
