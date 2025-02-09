@@ -94,7 +94,7 @@ function PostDetails() {
             masonryInstance = new Masonry(".patterns", {
                 itemSelector: ".post-large",
                 columnWidth: ".post-large",
-                gutter: 15,
+                gutter: 45,
             });
         });
 
