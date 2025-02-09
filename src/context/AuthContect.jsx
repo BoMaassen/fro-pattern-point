@@ -7,13 +7,13 @@ import isTokenValid from "../helpers/isTokenValid.js";
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}){
-    const navigate = useNavigate();
     const [error, setError] = useState("");
     const [auth, setAuth] = useState({
         isAuth: false,
         user: null,
         status: 'pending',
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("aplicatie refresht")

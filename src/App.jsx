@@ -15,7 +15,6 @@ import PostDetails from "./pages/post-details/PostDetails.jsx";
 import NotFound from "./pages/not-found/NotFound.jsx";
 import Login from "./pages/login/Login.jsx";
 
-
 function App() {
     const navigate = useNavigate();
     const {isAuth, user} = useContext(AuthContext);

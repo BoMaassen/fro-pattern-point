@@ -29,7 +29,6 @@ function Account() {
         };
     }, [posts]);
 
-
     return (<main>
             <h1>Account</h1>
             <section className="account-container">
